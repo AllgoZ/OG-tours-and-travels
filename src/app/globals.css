@@ -1,0 +1,421 @@
+@import "tailwindcss";
+
+/* ============================================================
+   OG TOURS AND TRAVELS — v2 design tokens
+   Dark-first cinematic system with light editorial sections.
+   ============================================================ */
+@theme {
+  --color-midnight: #10141b;
+  --color-graphite: #1b2028;
+  --color-graphite-2: #232933;
+  --color-soft: #f5f6f8;
+  --color-slate: #929ba8;
+  --color-lime: #c6f36b;
+  --color-lime-dim: #a9d94f;
+  --color-light: #eceff2;
+  --color-ink: #10141b;
+
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+
+  --radius-control: 0.625rem;
+
+  --ease-out-soft: cubic-bezier(0.22, 0.68, 0.24, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+html[data-scroll-behavior="smooth"] {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-midnight);
+  color: var(--color-soft);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+/* Focus: lime on dark, ink on light */
+:focus-visible {
+  outline: 3px solid var(--color-lime);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.on-light :focus-visible {
+  outline-color: var(--color-ink);
+}
+::selection {
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
+/* ---------- Section surfaces ---------- */
+.surface-dark {
+  background: var(--color-midnight);
+  color: var(--color-soft);
+}
+.surface-graphite {
+  background: var(--color-graphite);
+  color: var(--color-soft);
+}
+.surface-light {
+  background: var(--color-light);
+  color: var(--color-ink);
+}
+
+/* subtle grain/texture overlay for dark immersive sections */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+/* ---------- Layout helpers ---------- */
+.container-x {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 40rem) {
+  .container-x {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 80rem) {
+  .container-x {
+    padding-inline: 2.5rem;
+  }
+}
+.section-y {
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+/* ---------- Type scale ---------- */
+.text-hero {
+  font-size: clamp(2.75rem, 1.2rem + 7.4vw, 7rem);
+  line-height: 0.96;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.text-display {
+  font-size: clamp(2.25rem, 1.3rem + 4.6vw, 4.5rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.text-h2 {
+  font-size: clamp(1.9rem, 1.3rem + 2.8vw, 3.25rem);
+  line-height: 1.02;
+  font-weight: 700;
+}
+.text-h3 {
+  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.6rem);
+  line-height: 1.12;
+  font-weight: 600;
+}
+.text-eyebrow {
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.text-lead {
+  font-size: clamp(1.0625rem, 1rem + 0.45vw, 1.3rem);
+  line-height: 1.5;
+}
+.font-serif-accent {
+  font-family: var(--font-serif);
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* hairline separators */
+.hr-fine {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.on-light .hr-fine,
+.surface-light .hr-fine {
+  border-top-color: rgba(16, 20, 27, 0.12);
+}
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+
+/* Hero entrance — pure CSS, content never waits on JS. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Clip-path reveal for the hero vehicle image */
+@keyframes clip-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(12px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+}
+/* word/line reveal — transform only (text stays opaque so it's not an LCP-delaying fade) */
+@keyframes word-up {
+  from {
+    transform: translateY(0.42em);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.anim-fade-up {
+  animation: fade-up 0.7s var(--ease-out-soft) both;
+  animation-delay: var(--delay, 0ms);
+}
+.anim-fade-in {
+  animation: fade-in 0.8s ease both;
+  animation-delay: var(--delay, 0ms);
+}
+.anim-clip {
+  animation: clip-reveal 0.85s var(--ease-out-expo) both;
+  animation-delay: var(--delay, 120ms);
+}
+
+/* Hero vehicle drives in from the left on load, then settles (transform only — the
+   hero section clips overflow, so no page shift or horizontal scroll). */
+@keyframes drive-in {
+  from {
+    transform: translateX(-42%);
+  }
+  to {
+    transform: none;
+  }
+}
+.anim-drive {
+  animation: drive-in 1.15s var(--ease-out-expo) both;
+  animation-delay: var(--delay, 150ms);
+}
+
+/* Headline word reveal: each .word carries its own --delay */
+.reveal-words .word {
+  display: inline-block;
+  animation: word-up 0.7s var(--ease-out-expo) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* Scroll reveal (content visible by default; hidden post-hydration only below the fold) */
+.reveal {
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft),
+    clip-path 0.8s var(--ease-out-expo);
+  transition-delay: var(--delay, 0ms);
+}
+.reveal[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal-clip[data-reveal="hidden"] {
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transform: none;
+}
+
+/* Accordion height animation without measuring */
+.collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows 0.3s var(--ease-out-soft),
+    visibility 0s linear 0.3s;
+}
+.collapsible[data-open="true"] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.collapsible > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Hover affordances only where hover exists */
+@media (hover: hover) and (pointer: fine) {
+  .lift {
+    transition:
+      transform 0.3s var(--ease-out-soft),
+      border-color 0.3s;
+  }
+  .lift:hover {
+    transform: translateY(-4px);
+  }
+  .arrow-slide {
+    transition: transform 0.25s var(--ease-out-soft);
+  }
+  .group:hover .arrow-slide {
+    transform: translate(3px, -3px);
+  }
+  .zoom-img {
+    transition: transform 0.6s var(--ease-out-soft);
+  }
+  .group:hover .zoom-img {
+    transform: scale(1.05);
+  }
+}
+
+/* Horizontal scroll strips */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reviews marquee — continuous horizontal scroll of duplicated content; pause on hover. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-viewport {
+  overflow: hidden;
+}
+.marquee-track {
+  animation: marquee 48s linear infinite;
+  width: max-content;
+}
+@media (hover: hover) and (pointer: fine) {
+  .marquee-viewport:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* No auto-scroll; let the viewer scroll the strip by hand instead. */
+  .marquee-viewport {
+    overflow-x: auto;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-scroll-behavior="smooth"] {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal[data-reveal="hidden"],
+  .reveal-clip[data-reveal="hidden"] {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
+
+/* Article prose (blog) */
+.prose-article {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: #d9dde3;
+}
+.prose-article > * + * {
+  margin-top: 1.25rem;
+}
+.prose-article h2 {
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
+  margin-top: 2.75rem;
+  scroll-margin-top: 6rem;
+  color: var(--color-soft);
+}
+.prose-article h3 {
+  font-size: 1.35rem;
+  margin-top: 2rem;
+  scroll-margin-top: 6rem;
+  color: var(--color-soft);
+}
+.prose-article a {
+  color: var(--color-lime);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-article strong {
+  color: var(--color-soft);
+}
+.prose-article ul,
+.prose-article ol {
+  padding-left: 1.4rem;
+}
+.prose-article ul {
+  list-style: disc;
+}
+.prose-article ol {
+  list-style: decimal;
+}
+.prose-article li + li {
+  margin-top: 0.5rem;
+}
+.prose-article blockquote {
+  border-left: 3px solid var(--color-lime);
+  padding-left: 1.25rem;
+  color: var(--color-soft);
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
