@@ -98,18 +98,21 @@ const browser = await chromium.launch();
   await page.waitForTimeout(500);
   ok((await page.getByRole("button", { name: /close menu/i }).count()) === 0, "menu closes after selecting a link");
 
-  console.log("Contact bar");
+  console.log("Floating contact buttons");
   await page.evaluate(() => window.scrollTo(0, 0));
   const bar = page.getByRole("region", { name: /quick contact/i });
   ok(await bar.isVisible(), "visible on mobile");
-  const box = await bar.boundingBox();
-  ok(box.y + box.height <= 801 && box.height < 95, `compact (${Math.round(box.height)}px) and inside viewport`);
-  ok((await bar.getByRole("link", { name: /call now/i }).getAttribute("href")) === `tel:${TEL}`, "tel: link uses the call number");
+  // Floating FABs: Call on the bottom-left, WhatsApp on the bottom-right.
+  const callBox = await bar.getByRole("link", { name: /call us/i }).boundingBox();
+  const waBox = await bar.getByRole("link", { name: /whatsapp/i }).boundingBox();
+  ok(callBox.x < 120 && callBox.y + callBox.height <= 845, `Call floats bottom-left (x=${Math.round(callBox.x)})`);
+  ok(waBox.x > 270 && waBox.y + waBox.height <= 845, `WhatsApp floats bottom-right (x=${Math.round(waBox.x)})`);
+  ok((await bar.getByRole("link", { name: /call us/i }).getAttribute("href")) === `tel:${TEL}`, "tel: link uses the call number");
   ok(/^https:\/\/wa\.me\/919159541288/.test(await bar.getByRole("link", { name: /whatsapp/i }).getAttribute("href")), "WhatsApp link uses the WhatsApp number");
   await page.locator("#trip-pickup").scrollIntoViewIfNeeded();
   await page.focus("#trip-pickup");
   await page.waitForTimeout(300);
-  ok((await bar.getAttribute("data-hidden")) === "true", "bar steps aside while a form field is focused");
+  ok((await bar.getAttribute("data-hidden")) === "true", "buttons step aside while a form field is focused");
 
   ok(errors.length === 0, "no console errors during interactions " + errors.join("|"));
   await ctx.close();

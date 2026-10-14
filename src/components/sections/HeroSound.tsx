@@ -7,19 +7,20 @@ const ENGINE_SRC = "/sounds/engine-roar.mp3";
 const HONK_SRC = "/sounds/car-honk.mp3";
 const ENGINE_VOLUME = 0.3;
 const HONK_VOLUME = 0.15;
-const HONK_DELAY_MS = 700; // honk arrives as the vehicle settles
+const HONK_DELAY_MS = 700; // honk sounds partway through the slide-in
 
 /**
- * Plays the engine roar (and a honk shortly after) once, synced with the hero vehicle's
- * slide-in on load. Kept quiet, plays a single time, and never for visitors who prefer
- * reduced motion.
- *
- * Browsers block audio before any user interaction, so we try on load and, if that is
- * blocked, play on the first user gesture instead.
+ * The hero vehicle drives in from the left on load (CSS, silent). Clicking/tapping the
+ * vehicle replays that drive-in and plays the engine roar + a honk — a click is a user
+ * gesture, so the browser allows the audio. Kept quiet; the honk a touch under the engine.
+ * The visual replay is skipped for visitors who prefer reduced motion.
  */
 export function HeroSound() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = document.getElementById("hero-vehicle");
+    if (!el) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const engine = new Audio(ENGINE_SRC);
     engine.preload = "auto";
@@ -29,37 +30,31 @@ export function HeroSound() {
     honk.preload = "auto";
     honk.volume = HONK_VOLUME;
 
-    let played = false;
     let honkTimer: ReturnType<typeof setTimeout> | undefined;
-    const gestures: Array<keyof WindowEventMap> = ["pointerdown", "keydown", "touchstart", "wheel"];
-    const cleanupGestures = () => gestures.forEach((g) => window.removeEventListener(g, start));
 
-    function start() {
-      if (played) return;
-      const p = engine.play();
-      if (p === undefined) {
-        // Older browsers: no promise — assume it started.
-        played = true;
-        cleanupGestures();
-        honkTimer = setTimeout(() => honk.play().catch(() => {}), HONK_DELAY_MS);
-        return;
+    const replay = () => {
+      // Replay the drive-in animation.
+      if (!reduced) {
+        el.classList.remove("anim-drive");
+        void el.offsetWidth; // force reflow so the animation can restart
+        el.classList.add("anim-drive");
       }
-      p.then(() => {
-        if (played) return; // a concurrent attempt already won
-        played = true;
-        cleanupGestures();
-        honkTimer = setTimeout(() => honk.play().catch(() => {}), HONK_DELAY_MS);
-      }).catch(() => {
-        // Blocked (no user gesture yet) — the gesture listeners below will retry.
-      });
-    }
+      // Play engine from the start, then the honk partway through.
+      clearTimeout(honkTimer);
+      try {
+        engine.currentTime = 0;
+      } catch {}
+      engine.play().catch(() => {});
+      honk.pause();
+      try {
+        honk.currentTime = 0;
+      } catch {}
+      honkTimer = setTimeout(() => honk.play().catch(() => {}), HONK_DELAY_MS);
+    };
 
-    // Try immediately (synced with the slide-in); fall back to the first user gesture.
-    start();
-    gestures.forEach((g) => window.addEventListener(g, start, { passive: true }));
-
+    el.addEventListener("click", replay);
     return () => {
-      cleanupGestures();
+      el.removeEventListener("click", replay);
       clearTimeout(honkTimer);
       engine.pause();
       honk.pause();

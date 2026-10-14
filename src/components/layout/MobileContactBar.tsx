@@ -5,9 +5,9 @@ import { MessageCircle, Phone } from "lucide-react";
 import { buildEnquiryMessage, hasPhone, hasWhatsApp, telHref, whatsappHref } from "@/lib/enquiry";
 
 /**
- * Fixed bottom Call / WhatsApp bar, mobile breakpoints only. Renders only the actions that
- * are configured. Steps out of the way while a form field is focused so it never collides
- * with the on-screen keyboard.
+ * Floating Call / WhatsApp buttons, mobile breakpoints only. Minimal icon-only FABs in the
+ * bottom-right corner. Renders only the actions that are configured, and slides out of the
+ * way while a form field is focused so it never collides with the on-screen keyboard.
  */
 export function MobileContactBar() {
   const [typing, setTyping] = useState(false);
@@ -29,37 +29,36 @@ export function MobileContactBar() {
   const wa = whatsappHref(buildEnquiryMessage({}));
   if (!(hasPhone || hasWhatsApp)) return null;
 
+  // The container spans the full width only to place the two FABs at opposite corners, so it
+  // must not swallow clicks in its empty middle — only the buttons are interactive.
+  const fab =
+    "pointer-events-auto group-data-[hidden=true]:pointer-events-none inline-flex size-13 items-center " +
+    "justify-center rounded-full shadow-[0_8px_24px_-6px_rgba(0,0,0,0.6)] transition-transform active:scale-95";
+
   return (
     <div
       role="region"
       aria-label="Quick contact"
       data-hidden={typing}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-midnight/95 px-3 pt-2.5 backdrop-blur-md transition-transform duration-200 data-[hidden=true]:translate-y-full md:hidden"
-      style={{ paddingBottom: "max(0.625rem, env(safe-area-inset-bottom))" }}
+      className="group pointer-events-none fixed inset-x-4 z-40 flex items-center transition-[transform,opacity] duration-200 data-[hidden=true]:translate-y-6 data-[hidden=true]:opacity-0 md:hidden"
+      style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
     >
-      <div className={`mx-auto grid max-w-lg gap-2.5 ${tel && wa ? "grid-cols-2" : "grid-cols-1"}`}>
-        {tel && (
-          <a
-            href={tel}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-control border border-white/25 text-sm font-semibold uppercase tracking-[0.04em] text-soft active:bg-white/10"
-          >
-            <Phone aria-hidden="true" className="size-[1.1em]" />
-            Call Now
-          </a>
-        )}
-        {wa && (
-          <a
-            href={wa}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-control bg-lime text-sm font-semibold uppercase tracking-[0.04em] text-ink active:brightness-95"
-          >
-            <MessageCircle aria-hidden="true" className="size-[1.1em]" />
-            WhatsApp
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
-        )}
-      </div>
+      {tel && (
+        <a href={tel} aria-label="Call us" className={`${fab} border border-white/20 bg-midnight/90 text-soft backdrop-blur-md active:bg-white/10`}>
+          <Phone aria-hidden="true" className="size-5" />
+        </a>
+      )}
+      {wa && (
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Enquire on WhatsApp (opens in a new tab)"
+          className={`${fab} ml-auto bg-lime text-ink active:brightness-95`}
+        >
+          <MessageCircle aria-hidden="true" className="size-6" />
+        </a>
+      )}
     </div>
   );
 }

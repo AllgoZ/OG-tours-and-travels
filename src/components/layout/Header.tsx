@@ -14,13 +14,22 @@ export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("top");
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuId = useId();
 
+  // Solid-on-scroll + auto-hide: slide the header up on scroll down, bring it back on scroll up.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      if (y > lastY && y > 96) setHidden(true);
+      else if (y < lastY) setHidden(false);
+      lastY = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -82,9 +91,9 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          solid ? "border-b border-white/10 bg-midnight/90 backdrop-blur-md" : "border-b border-transparent"
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 transition-[translate,background-color,border-color] duration-300 ${
+          hidden && !open ? "-translate-y-full" : "translate-y-0"
+        } ${solid ? "border-b border-white/10 bg-midnight/90 backdrop-blur-md" : "border-b border-transparent"}`}
       >
       <div className="container-x flex h-[4.5rem] items-center justify-between gap-3 lg:h-[4.75rem]">
         <Link

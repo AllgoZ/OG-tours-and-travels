@@ -47,11 +47,16 @@ export function HeroSection() {
           ))}
         </h1>
 
-        {/* Vehicle — single transparent cut-out that drives in from the right on load.
-            Full-width on mobile, bleeding right on desktop; sits behind the headline so
-            the type always reads. */}
+        {/* Vehicle — single transparent cut-out. It drives in from the left on load (silent);
+            clicking/tapping it replays the drive-in with the engine + honk sound (a click is a
+            user gesture, so audio is allowed). Reduced-motion/no-JS: shown in place.
+            Full-width on mobile, bleeding right on desktop; sits behind the headline so the
+            type always reads. */}
         <HeroSound />
-        <div className="anim-drive relative z-0 mt-6 lg:absolute lg:inset-y-0 lg:right-[-6%] lg:mt-0 lg:flex lg:w-[58%] lg:items-center">
+        <div
+          id="hero-vehicle"
+          className="anim-drive relative z-0 mt-6 cursor-pointer lg:absolute lg:inset-y-0 lg:right-[-6%] lg:mt-0 lg:flex lg:w-[58%] lg:items-center"
+        >
           <Image
             src={sideCutout}
             alt={`OG Tours and Travels' grey Force Urbania with yellow side stripes — registration ${business.vehicle.registration}`}
