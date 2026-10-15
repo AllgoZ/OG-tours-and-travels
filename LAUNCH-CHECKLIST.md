@@ -5,7 +5,7 @@ Run `npm run check:launch` for a live report. Items default to `null` / empty in
 
 ## Already configured
 
-- [x] **WhatsApp number** — `+91 91595 41288` (`wa.me/919159541288`)
+- [x] **WhatsApp number** — `+91 81108 11003` (`wa.me/918110811003`)
 - [x] **Call number** — `+91 81240 12407` (`tel:+918124012407`)
 
 These are shown on the vehicle and were confirmed by the owner. The two are kept separate

@@ -59,8 +59,8 @@ export const business = {
   // Confirmed by the owner (visible on the vehicle). Env vars may override for staging.
   /** Call number. tel:+918124012407 */
   phone: clean(process.env.NEXT_PUBLIC_PHONE) ?? "+918124012407",
-  /** WhatsApp number (separate from the call number). https://wa.me/919159541288 */
-  whatsapp: clean(process.env.NEXT_PUBLIC_WHATSAPP) ?? "+919159541288",
+  /** WhatsApp number (separate from the call number). https://wa.me/918110811003 */
+  whatsapp: clean(process.env.NEXT_PUBLIC_WHATSAPP) ?? "+918110811003",
   /** CONFIRM (optional). */
   email: clean(process.env.NEXT_PUBLIC_EMAIL),
 

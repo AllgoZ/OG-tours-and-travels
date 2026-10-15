@@ -52,7 +52,7 @@ node scripts/qa-interact.mjs http://localhost:3100         # form, FAQ, menu, co
 is invented; anything unknown is `null` / `[]` and simply isn't rendered.
 
 Already set (confirmed, visible on the vehicle):
-- **WhatsApp** `+91 91595 41288` → `wa.me/919159541288`
+- **WhatsApp** `+91 81108 11003` → `wa.me/918110811003`
 - **Call** `+91 81240 12407` → `tel:+918124012407`
 
 These are kept strictly separate everywhere (WhatsApp for enquiries, phone for calls). They can

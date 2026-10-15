@@ -5,7 +5,7 @@
 import { chromium } from "playwright";
 
 const base = process.argv[2] ?? "http://localhost:3100";
-const WA = "919159541288";
+const WA = "918110811003";
 const TEL = "+918124012407";
 let failures = 0;
 const ok = (cond, msg) => {
@@ -108,7 +108,7 @@ const browser = await chromium.launch();
   ok(callBox.x < 120 && callBox.y + callBox.height <= 845, `Call floats bottom-left (x=${Math.round(callBox.x)})`);
   ok(waBox.x > 270 && waBox.y + waBox.height <= 845, `WhatsApp floats bottom-right (x=${Math.round(waBox.x)})`);
   ok((await bar.getByRole("link", { name: /call us/i }).getAttribute("href")) === `tel:${TEL}`, "tel: link uses the call number");
-  ok(/^https:\/\/wa\.me\/919159541288/.test(await bar.getByRole("link", { name: /whatsapp/i }).getAttribute("href")), "WhatsApp link uses the WhatsApp number");
+  ok(/^https:\/\/wa\.me\/918110811003/.test(await bar.getByRole("link", { name: /whatsapp/i }).getAttribute("href")), "WhatsApp link uses the WhatsApp number");
   await page.locator("#trip-pickup").scrollIntoViewIfNeeded();
   await page.focus("#trip-pickup");
   await page.waitForTimeout(300);

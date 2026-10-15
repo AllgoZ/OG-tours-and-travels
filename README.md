@@ -55,7 +55,7 @@ all self-hosted via `next/font`. Surface helpers: `.surface-night` (teal→navy 
 
 Everything about the business lives in **[`src/config/business.ts`](src/config/business.ts)**.
 
-The **WhatsApp (`+91 91595 41288`) and call (`+91 81240 12407`) numbers are configured** as
+The **WhatsApp (`+91 81108 11003`) and call (`+91 81240 12407`) numbers are configured** as
 defaults (they are shown on the vehicle). Everything still unknown is `null` / `[]` and nothing
 is invented or rendered for it.
 
@@ -85,7 +85,7 @@ npm run check:launch -- --strict   # exit 1 if a required item is missing (use i
 ## The enquiry flow
 
 `src/lib/enquiry.ts` builds every link from the configured numbers and keeps WhatsApp and phone
-**strictly separate** (WhatsApp → `wa.me/919159541288`, Call → `tel:+918124012407`). `CtaLink`
+**strictly separate** (WhatsApp → `wa.me/918110811003`, Call → `tel:+918124012407`). `CtaLink`
 renders them consistently across the hero, vehicle section, header, mobile bar, footer, blog and
 final CTA.
 

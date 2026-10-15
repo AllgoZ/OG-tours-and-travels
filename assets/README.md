@@ -18,7 +18,7 @@ Web-ready crops are generated from them by `npm run images` into `src/assets/ima
 ## Notes on the rear cut-out
 
 `cutout-rear.png` shows **"RRP Groups"** branding and three phone numbers on the right rear
-window (one of which, 9159541288, is the configured WhatsApp number; 8124012407 is the call
+window (one of which, 8110811003, is the configured WhatsApp number; 8124012407 is the call
 number). The owner confirmed this image should be used **as supplied, unedited**. It appears
 in the vehicle gallery and as the featured article cover.
 
