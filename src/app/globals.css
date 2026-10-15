@@ -2,18 +2,34 @@
 
 /* ============================================================
    OG TOURS AND TRAVELS — v2 design tokens
-   Dark-first cinematic system with light editorial sections.
+   Logistics-style theme: deep teal -> navy gradient for the hero /
+   final CTA / footer (.surface-night), white and pale blue sections,
+   amber primary buttons, green WhatsApp buttons.
+   NOTE: some token names are legacy from earlier themes.
+     midnight  -> #FFFFFF white      (page + header background)
+     graphite  -> #FFFFFF white      (drawers)
+     light     -> #EEF4F7 pale blue  (alternate sections)
+     ink       -> #0C3B4E deep teal  (headings / text; white inside .surface-night)
+     slate     -> muted blue-grey    (secondary text)
+     accent    -> #F5B50A amber      (primary buttons; text on it is `navy`)
+     coral     -> amber              (thin lines, progress)
+     accent-deep -> green #1B7F57    (eyebrows, links; amber inside .surface-night)
    ============================================================ */
 @theme {
-  --color-midnight: #10141b;
-  --color-graphite: #1b2028;
-  --color-graphite-2: #232933;
-  --color-soft: #f5f6f8;
-  --color-slate: #929ba8;
-  --color-lime: #c6f36b;
-  --color-lime-dim: #a9d94f;
-  --color-light: #eceff2;
-  --color-ink: #10141b;
+  --color-midnight: #ffffff;
+  --color-graphite: #ffffff;
+  --color-graphite-2: #eef4f7;
+  --color-soft: #ffffff;
+  --color-slate: #4a5f6c;
+  --color-accent: #f5b50a;
+  --color-accent-hover: #e0a300;
+  --color-accent-deep: #1b7f57;
+  --color-coral: #f5b50a;
+  --color-navy: #0a2f40;
+  --color-wa: #178a43;
+  --color-wa-hover: #12763a;
+  --color-light: #eef4f7;
+  --color-ink: #0c3b4e;
 
   --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -35,7 +51,7 @@ html[data-scroll-behavior="smooth"] {
 
 body {
   background: var(--color-midnight);
-  color: var(--color-soft);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.6;
@@ -53,46 +69,41 @@ h4 {
   text-wrap: balance;
 }
 
-/* Focus: lime on dark, ink on light */
+/* Focus ring: ink, readable on every pastel surface */
 :focus-visible {
-  outline: 3px solid var(--color-lime);
+  outline: 3px solid var(--color-ink);
   outline-offset: 3px;
   border-radius: 6px;
 }
-.on-light :focus-visible {
-  outline-color: var(--color-ink);
-}
 ::selection {
-  background: var(--color-lime);
+  background: var(--color-accent);
   color: var(--color-ink);
 }
 
 /* ---------- Section surfaces ---------- */
 .surface-dark {
   background: var(--color-midnight);
-  color: var(--color-soft);
+  color: var(--color-ink);
+}
+/* Deep teal -> navy gradient. Re-points the text tokens (also available alone as `.on-night`) so every `text-ink` / `text-slate`
+   utility inside it renders light, and accent text/lines turn amber. */
+.surface-night,
+.on-night {
+  --color-ink: #ffffff;
+  --color-slate: #c3d7df;
+  --color-accent-deep: #f5b50a;
+}
+.surface-night {
+  background: linear-gradient(168deg, #0d5b70 0%, #124a68 48%, #1d3a68 100%);
+  color: #ffffff;
 }
 .surface-graphite {
   background: var(--color-graphite);
-  color: var(--color-soft);
+  color: var(--color-ink);
 }
 .surface-light {
   background: var(--color-light);
   color: var(--color-ink);
-}
-
-/* subtle grain/texture overlay for dark immersive sections */
-.grain {
-  position: relative;
-}
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.4;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 3px 3px;
 }
 
 /* ---------- Layout helpers ---------- */
@@ -159,11 +170,11 @@ h4 {
 /* hairline separators */
 .hr-fine {
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(33, 56, 67, 0.12);
 }
 .on-light .hr-fine,
 .surface-light .hr-fine {
-  border-top-color: rgba(16, 20, 27, 0.12);
+  border-top-color: rgba(33, 56, 67, 0.12);
 }
 
 /* ============================================================
@@ -373,7 +384,7 @@ h4 {
 .prose-article {
   font-size: 1.1rem;
   line-height: 1.75;
-  color: #d9dde3;
+  color: #2f3b4d;
 }
 .prose-article > * + * {
   margin-top: 1.25rem;
@@ -382,21 +393,21 @@ h4 {
   font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem);
   margin-top: 2.75rem;
   scroll-margin-top: 6rem;
-  color: var(--color-soft);
+  color: var(--color-ink);
 }
 .prose-article h3 {
   font-size: 1.35rem;
   margin-top: 2rem;
   scroll-margin-top: 6rem;
-  color: var(--color-soft);
+  color: var(--color-ink);
 }
 .prose-article a {
-  color: var(--color-lime);
+  color: var(--color-accent-deep);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .prose-article strong {
-  color: var(--color-soft);
+  color: var(--color-ink);
 }
 .prose-article ul,
 .prose-article ol {
@@ -412,9 +423,9 @@ h4 {
   margin-top: 0.5rem;
 }
 .prose-article blockquote {
-  border-left: 3px solid var(--color-lime);
+  border-left: 3px solid var(--color-coral);
   padding-left: 1.25rem;
-  color: var(--color-soft);
+  color: var(--color-ink);
   font-family: var(--font-serif);
   font-size: 1.4rem;
   line-height: 1.4;

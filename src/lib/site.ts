@@ -27,7 +27,6 @@ export const SECTION = {
   top: "top",
   vehicle: "vehicle",
   services: "services",
-  whyUs: "why-us",
   how: "how-it-works",
   enquire: "enquire",
   destinations: "destinations",

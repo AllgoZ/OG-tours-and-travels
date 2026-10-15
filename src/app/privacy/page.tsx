@@ -15,16 +15,16 @@ export default function PrivacyPage() {
   const tel = telHref();
   const wa = whatsappHref();
   return (
-    <div className="surface-dark grain">
+    <div className="surface-dark">
       <article className="container-x max-w-3xl pt-28 pb-24 sm:pt-32 lg:pt-36">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Privacy Policy" }]} />
         <p className="text-eyebrow mt-8 text-slate">Legal</p>
-        <h1 className="text-display mt-4 text-soft">Privacy Policy</h1>
+        <h1 className="text-display mt-4 text-ink">Privacy Policy</h1>
         {business.privacyUpdated && (
           <p className="mt-3 text-slate">Last updated: {business.privacyUpdated}</p>
         )}
 
-        <div className="mt-10 space-y-8 [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-soft [&_li]:text-slate [&_p]:mt-2 [&_p]:text-slate [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5">
+        <div className="mt-10 space-y-8 [&_h2]:font-heading [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-ink [&_li]:text-slate [&_p]:mt-2 [&_p]:text-slate [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5">
           <section>
             <h2>Who we are</h2>
             <p>
@@ -82,7 +82,7 @@ export default function PrivacyPage() {
         <p className="mt-10">
           <Link
             href="/"
-            className="inline-flex min-h-11 items-center font-semibold text-lime underline underline-offset-4"
+            className="inline-flex min-h-11 items-center font-semibold text-accent-deep underline underline-offset-4"
           >
             Back to home
           </Link>

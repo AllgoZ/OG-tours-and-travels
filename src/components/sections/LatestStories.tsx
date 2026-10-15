@@ -11,18 +11,17 @@ export function LatestStories() {
   if (posts.length === 0) return null;
 
   return (
-    <section id={SECTION.blog} aria-labelledby="stories-title" className="grain surface-dark section-y">
+    <section id={SECTION.blog} aria-labelledby="stories-title" className="surface-dark section-y">
       <div className="container-x">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               id="stories-title"
-              eyebrow="The journal"
               title="Travel notes & planning guides"
             />
             <Link
               href="/blog"
-              className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-soft transition-colors hover:text-lime"
+              className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-accent-deep"
             >
               All articles
               <ArrowUpRight aria-hidden="true" className="size-4" />

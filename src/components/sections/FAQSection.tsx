@@ -11,9 +11,7 @@ export function FAQSection() {
         <Reveal className="lg:col-span-4">
           <SectionHeading
             id="faq-title"
-            eyebrow="FAQ"
             title="Questions, answered"
-            intro="Pricing and availability depend on your trip, so we always confirm them with you directly."
             tone="light"
           />
         </Reveal>

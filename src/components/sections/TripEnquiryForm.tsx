@@ -142,7 +142,7 @@ export function TripEnquiryForm() {
   };
 
   return (
-    <div className="rounded-2xl border border-ink/10 bg-[#f6f8fa] p-5 shadow-[0_20px_50px_-30px_rgba(16,20,27,0.4)] sm:p-7">
+    <div className="rounded-2xl border border-ink/10 bg-midnight p-5 shadow-[0_20px_50px_-30px_rgba(33,56,67,0.3)] sm:p-7">
       <form ref={formRef} onSubmit={onSubmit} noValidate aria-describedby={errorCount ? "trip-summary" : undefined}>
         {errorCount > 0 && (
           <p id="trip-summary" role="alert" className="mb-4 flex items-center gap-2 text-sm font-semibold text-[#b42318]">

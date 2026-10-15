@@ -1,6 +1,6 @@
 # Handover — OG Tours and Travels website
 
-A premium, mobile-first marketing site for **OG Tours and Travels** (group travel and Force
+A clean, minimal, mobile-first marketing site for **OG Tours and Travels** (group travel and Force
 Urbania vehicle hire). Its single goal is enquiries via **WhatsApp or phone**; there is no
 backend, database, or login.
 
@@ -17,7 +17,8 @@ go-live steps in [`LAUNCH-CHECKLIST.md`](LAUNCH-CHECKLIST.md).
 
 ```bash
 npm install
-npm run images       # generate web images/icons from assets/originals (first run / after image changes)
+npm run images       # generate web images/icons from assets/originals (first run / after image changes;
+                     #   also paints the number plate out of the vehicle photos)
 npm run dev          # http://localhost:3000
 npm run build        # production build
 npm start            # serve the production build
@@ -78,7 +79,10 @@ Run `npm run check:launch` for the live list. Summary:
 - [ ] Confirm **services**, add **vehicle specs**, **service area**, **address**, and the **Google Business Profile** URL if desired.
 - [ ] Review the **privacy policy** copy and set `privacyUpdated`.
 
-Photo note: the rear cut-out shows "RRP Groups" branding (same operator — the numbers match) and
+Photo note: the **number plate is hidden** in every vehicle image — `npm run images` paints it out
+(boxes in `PLATES` in `scripts/optimize-images.mjs`; originals in `assets/originals` are never
+modified, patched copies go to `node_modules/.cache`). The registration is also removed from alt
+text. The rear cut-out shows "RRP Groups" branding (same operator — the numbers match) and
 is used as-is per the owner's decision. Blog cover images are generated composites of the van and
 are example imagery — replace with real photography when available.
 
@@ -92,8 +96,8 @@ src/
                        blog/ (page · page/[n] · [slug] · feed.xml)
   components/
     layout/            Header (sticky + auto-hide) · MobileNavigation (right drawer)
-                       MobileContactBar (floating Call/WhatsApp FABs) · Footer · ScrollProgress · DevConfigNotice
-    sections/          Hero(+HeroSound) · ValueStrip · VehicleShowcase(+Gallery) · Services · Benefits
+                       MobileContactBar (floating Call/WhatsApp FABs) · Footer · DevConfigNotice
+    sections/          Hero(+HeroSound) · VehicleShowcase(+Gallery) · Services
                        GoogleReviews · BookingSteps(+TripEnquiryForm) · Destinations · LatestStories · FAQ · FinalCTA
     blog/              BlogListing · ArticleCard · Breadcrumbs · TableOfContents
     ui/                CtaLink · buttonStyles · Accordion · Reveal · Logo · SectionHeading
@@ -107,8 +111,18 @@ assets/                untouched originals + placement notes (assets/README.md)
 scripts/               optimize-images · check-launch · qa · qa-interact · serve-qa.sh
 ```
 
-Design tokens live once in `src/app/globals.css` under `@theme` (midnight/graphite/soft/slate/lime/
-light). Lime is an accent only; text on lime is always dark.
+Design tokens live once in `src/app/globals.css` under `@theme`. **Token names are legacy** (from
+the old dark theme) — the comment at the top of that file maps each name to its current value.
+Current "logistics" theme (taken from a Pick & Drop Logistics reference):
+- **Hero, final CTA, footer and header** are deep teal→navy (`.surface-night` / `.on-night`). These
+  classes re-point `--color-ink`/`--color-slate`/`--color-accent-deep` so every `text-ink` etc.
+  inside renders white / light / amber automatically.
+- Everything else is white (`midnight`/`graphite`) or pale blue (`light` `#EEF4F7`); text is deep
+  teal `ink` `#0C3B4E`; eyebrows/links are green `accent-deep`.
+- **Buttons** (`buttonClass` in `src/components/ui/buttonStyles.ts`): `accent` = amber with navy text
+  (primary), `whatsapp` = green with white text (`CtaLink` picks it automatically for WhatsApp,
+  `accent` for calls), `outline-*` / `dark` / `light` as before.
+- Header is a solid teal bar (`#0D5B70`) at all times; it still auto-hides on scroll down.
 
 ---
 
@@ -122,7 +136,7 @@ light). Lime is an accent only; text on lime is always dark.
   `BlogPosting` + `BreadcrumbList` JSON-LD. `draft: true` hides a post in production.
 - **Hero**: the van slides in on load (silent); tapping/clicking it replays the slide **with the
   engine + honk sound**. Headline animates transform-only so it never delays LCP.
-- **Header**: solid-on-scroll, and **auto-hides on scroll down / returns on scroll up**.
+- **Header**: solid teal bar, **auto-hides on scroll down / returns on scroll up**.
 - **Mobile contact**: **floating** buttons — Call bottom-left, WhatsApp bottom-right. The
   container is click-through (only the buttons are tappable) and they slide away when a field is focused.
 - **Reviews**: a scrolling marquee driven by `reviews` in config; only `verified` reviews show in production.
@@ -156,6 +170,11 @@ Console, and link the Google Business Profile.
 
 ## 8. Recent change history (newest first)
 
+- **Number plate hidden** in all vehicle images (image script paints it out); registration removed from alt text.
+- **Header is now the same teal as the hero** (solid, white text).
+- **Theme change to the logistics palette** (teal/navy gradient hero, amber + green buttons, white/pale-blue sections); icons, social image and blog covers regenerated in the new colours.
+- **Minimal clean-up**: removed the "why travel" strip and section, the 3-step cards, hero scroll cue/caption/secondary button, eyebrow labels, grain texture, scroll-progress bar and footer CTA. Kept everything SEO-relevant (H1, headings, service/FAQ/vehicle copy, alt text, article links, JSON-LD).
+- Earlier this session the site went through cream/peach, indigo and teal-peach palettes before settling on the current one.
 - Hero van slides on load (silent); click/tap replays it with engine + honk sound.
 - Mobile Call/WhatsApp moved from a bottom bar to **floating** buttons (Call left, WhatsApp right); header auto-hides on scroll.
 - Hero vehicle drive-in direction set to left→right; real `.mp3` engine/honk added (low volume, honk under engine).
@@ -163,4 +182,4 @@ Console, and link the Google Business Profile.
 - v2 redesign: cinematic dark-first identity, new palette/fonts, motion, and the SEO blog system.
 - Initial build: full landing page, config-driven enquiry flow, SEO foundations.
 
-_Last updated for commit on `main` adding floating buttons + auto-hide header + click-to-replay hero sound._
+_Last updated for the commit "Logistics theme, minimal clean-up, hide number plate" on `main`._

@@ -15,7 +15,7 @@ export function ArticleCard({ post, priority }: ArticleCardProps) {
     <article className="group flex h-full flex-col">
       <Link
         href={`/blog/${post.slug}`}
-        className="relative block overflow-hidden rounded-xl border border-white/10"
+        className="relative block overflow-hidden rounded-xl border border-ink/10"
       >
         <div className="aspect-[16/10] overflow-hidden">
           <Image
@@ -30,12 +30,12 @@ export function ArticleCard({ post, priority }: ArticleCardProps) {
         </div>
       </Link>
       <div className="mt-4 flex items-center gap-3 text-xs uppercase tracking-[0.14em] text-slate">
-        <span className="text-lime">{post.category}</span>
+        <span className="text-accent-deep">{post.category}</span>
         <span aria-hidden="true">·</span>
         <span>{post.readingMinutes} min read</span>
       </div>
-      <h3 className="mt-3 font-heading text-xl font-bold leading-tight text-soft">
-        <Link href={`/blog/${post.slug}`} className="transition-colors group-hover:text-lime">
+      <h3 className="mt-3 font-heading text-xl font-bold leading-tight text-ink">
+        <Link href={`/blog/${post.slug}`} className="transition-colors group-hover:text-accent-deep">
           {post.title}
           <ArrowUpRight aria-hidden="true" className="arrow-slide ml-1 inline size-4 align-text-top text-slate" />
         </Link>

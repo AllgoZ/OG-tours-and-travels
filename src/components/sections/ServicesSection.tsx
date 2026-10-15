@@ -24,7 +24,6 @@ export function ServicesSection() {
         <Reveal>
           <SectionHeading
             id="services-title"
-            eyebrow="Services"
             title="Travel solutions for every occasion"
             tone="light"
           />
@@ -37,10 +36,7 @@ export function ServicesSection() {
             return (
               <Reveal as="li" key={service.id} delay={i * 60}>
                 <div className="group relative grid gap-4 border-b border-ink/12 py-8 md:grid-cols-12 md:items-baseline md:gap-6">
-                  <span aria-hidden="true" className="font-heading text-sm font-semibold text-ink/65 md:col-span-1">
-                    0{i + 1}
-                  </span>
-                  <h3 className="font-heading text-2xl font-bold tracking-tight text-ink md:col-span-4 lg:text-[1.75rem]">
+                  <h3 className="font-heading text-2xl font-bold tracking-tight text-ink md:col-span-5 lg:text-[1.75rem]">
                     {service.title}
                   </h3>
                   <p className="text-ink/70 md:col-span-5">{service.description}</p>
@@ -66,10 +62,10 @@ export function ServicesSection() {
                       </Link>
                     )}
                   </div>
-                  {/* lime underline on hover */}
+                  {/* accent underline on hover */}
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 bottom-[-1px] h-0.5 origin-left scale-x-0 bg-lime transition-transform duration-500 group-hover:scale-x-100"
+                    className="pointer-events-none absolute inset-x-0 bottom-[-1px] h-0.5 origin-left scale-x-0 bg-coral transition-transform duration-500 group-hover:scale-x-100"
                   />
                 </div>
               </Reveal>

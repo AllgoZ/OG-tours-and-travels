@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { business } from "@/config/business";
 import { LogoMark, Wordmark } from "@/components/ui/Logo";
-import { CtaLink } from "@/components/ui/CtaLink";
 import { hasPhone, hasWhatsApp, phoneDisplay, telHref, whatsappDisplay, whatsappHref } from "@/lib/enquiry";
 import { NAV_LINKS } from "@/lib/site";
 import { CurrentYear } from "./CurrentYear";
@@ -15,7 +14,7 @@ export function Footer() {
   );
 
   return (
-    <footer className="grain surface-dark border-t border-white/10">
+    <footer className="surface-night border-t border-white/10">
       <div className="container-x section-y pb-10">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
@@ -27,13 +26,6 @@ export function Footer() {
               Comfortable group travel and private vehicle hire for families, groups, events and
               corporate customers, aboard our Force Urbania.
             </p>
-            {hasWhatsApp && (
-              <div className="mt-6">
-                <CtaLink kind="whatsapp" size="md">
-                  Plan Your Trip
-                </CtaLink>
-              </div>
-            )}
           </div>
 
           <nav aria-label="Footer" className="md:col-span-3">
@@ -43,7 +35,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-11 items-center text-soft/90 transition-colors hover:text-lime"
+                    className="inline-flex min-h-11 items-center text-ink/90 transition-colors hover:text-accent-deep"
                   >
                     {link.label}
                   </Link>
@@ -54,14 +46,14 @@ export function Footer() {
 
           <div className="md:col-span-4">
             <h2 className="text-eyebrow text-slate">Contact</h2>
-            <ul className="mt-5 space-y-3 text-soft/90">
+            <ul className="mt-5 space-y-3 text-ink/90">
               {wa && (
                 <li>
                   <a
                     href={wa}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center hover:text-lime"
+                    className="inline-flex min-h-11 items-center hover:text-accent-deep"
                   >
                     WhatsApp {whatsappDisplay()}
                   </a>
@@ -69,7 +61,7 @@ export function Footer() {
               )}
               {tel && (
                 <li>
-                  <a href={tel} className="inline-flex min-h-11 items-center hover:text-lime">
+                  <a href={tel} className="inline-flex min-h-11 items-center hover:text-accent-deep">
                     Call {phoneDisplay()}
                   </a>
                 </li>
@@ -78,7 +70,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`mailto:${business.email}`}
-                    className="inline-flex min-h-11 items-center gap-2 hover:text-lime"
+                    className="inline-flex min-h-11 items-center gap-2 hover:text-accent-deep"
                   >
                     <Mail aria-hidden="true" className="size-4" />
                     {business.email}
@@ -97,7 +89,7 @@ export function Footer() {
                     href={url}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="inline-flex min-h-11 items-center capitalize hover:text-lime"
+                    className="inline-flex min-h-11 items-center capitalize hover:text-accent-deep"
                   >
                     {name}
                   </a>
@@ -110,11 +102,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 pb-[calc(4.5rem+env(safe-area-inset-bottom))] text-sm text-slate sm:flex-row sm:items-center sm:justify-between md:pb-0">
+        <div className="mt-14 flex flex-col gap-2 border-t border-ink/10 pt-6 pb-[calc(4.5rem+env(safe-area-inset-bottom))] text-sm text-slate sm:flex-row sm:items-center sm:justify-between md:pb-0">
           <p>
             © <CurrentYear /> {business.name}. All rights reserved.
           </p>
-          <Link href="/privacy" className="inline-flex min-h-11 items-center hover:text-lime">
+          <Link href="/privacy" className="inline-flex min-h-11 items-center hover:text-accent-deep">
             Privacy Policy
           </Link>
         </div>

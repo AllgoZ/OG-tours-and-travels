@@ -16,15 +16,15 @@ interface BlogListingProps {
 
 export function BlogListing({ description, featured, posts, currentPage, totalPages }: BlogListingProps) {
   return (
-    <div className="surface-dark grain">
+    <div className="surface-dark">
       <div className="container-x pt-28 pb-16 sm:pt-32 lg:pt-36">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Journal" }]} />
         <p className="text-eyebrow mt-8 flex items-center gap-3 text-slate">
-          <span aria-hidden="true" className="h-px w-10 bg-lime" />
+          <span aria-hidden="true" className="h-px w-10 bg-coral" />
           The journal
         </p>
-        <h1 className="text-display mt-5 max-w-3xl text-soft">
-          Travel notes &amp; <span className="font-serif-accent italic text-lime">planning guides</span>
+        <h1 className="text-display mt-5 max-w-3xl text-ink">
+          Travel notes &amp; <span className="font-serif-accent italic text-accent-deep">planning guides</span>
         </h1>
         <p className="text-lead mt-5 max-w-2xl text-slate">{description}</p>
       </div>
@@ -33,7 +33,7 @@ export function BlogListing({ description, featured, posts, currentPage, totalPa
         <div className="container-x pb-14">
           <Link
             href={`/blog/${featured.slug}`}
-            className="group grid gap-6 overflow-hidden rounded-2xl border border-white/10 lg:grid-cols-2 lg:items-stretch"
+            className="group grid gap-6 overflow-hidden rounded-2xl border border-ink/10 lg:grid-cols-2 lg:items-stretch"
           >
             <div className="aspect-[16/10] overflow-hidden lg:aspect-auto">
               <Image
@@ -47,16 +47,16 @@ export function BlogListing({ description, featured, posts, currentPage, totalPa
             </div>
             <div className="flex flex-col justify-center p-2 pb-6 lg:p-10">
               <div className="flex items-center gap-3 text-xs uppercase tracking-[0.14em] text-slate">
-                <span className="rounded-full bg-lime px-2.5 py-1 font-semibold text-ink">Featured</span>
-                <span className="text-lime">{featured.category}</span>
+                <span className="rounded-full bg-accent px-2.5 py-1 font-semibold text-navy">Featured</span>
+                <span className="text-accent-deep">{featured.category}</span>
                 <span aria-hidden="true">·</span>
                 <span>{featured.readingMinutes} min read</span>
               </div>
-              <h2 className="mt-4 font-heading text-2xl font-bold leading-tight text-soft transition-colors group-hover:text-lime lg:text-4xl">
+              <h2 className="mt-4 font-heading text-2xl font-bold leading-tight text-ink transition-colors group-hover:text-accent-deep lg:text-4xl">
                 {featured.title}
               </h2>
               <p className="mt-4 max-w-xl text-slate">{featured.excerpt}</p>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-soft">
+              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink">
                 Read article
                 <ArrowUpRight aria-hidden="true" className="arrow-slide size-4" />
               </span>
@@ -85,8 +85,8 @@ export function BlogListing({ description, featured, posts, currentPage, totalPa
                 aria-current={n === currentPage ? "page" : undefined}
                 className={`inline-flex size-11 items-center justify-center rounded-control border text-sm font-semibold transition-colors ${
                   n === currentPage
-                    ? "border-lime bg-lime text-ink"
-                    : "border-white/15 text-slate hover:border-white/40 hover:text-soft"
+                    ? "border-accent bg-accent text-navy"
+                    : "border-ink/15 text-slate hover:border-ink/40 hover:text-ink"
                 }`}
               >
                 {n}

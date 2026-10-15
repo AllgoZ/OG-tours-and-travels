@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Heading } from "@/lib/blog";
 
-/** Sticky table of contents with scroll-spy and a lime reading-progress bar. */
+/** Sticky table of contents with scroll-spy and a accent reading-progress bar. */
 export function TableOfContents({ headings }: { headings: Heading[] }) {
   const [activeId, setActiveId] = useState<string>(headings[0]?.id ?? "");
   const progressRef = useRef<HTMLDivElement>(null);
@@ -54,15 +54,15 @@ export function TableOfContents({ headings }: { headings: Heading[] }) {
     <nav aria-label="On this page" className="hidden lg:block">
       <div className="sticky top-28">
         <p className="text-eyebrow text-slate">On this page</p>
-        <div aria-hidden="true" className="mt-4 h-0.5 w-full overflow-hidden rounded bg-white/10">
-          <div ref={progressRef} className="h-full origin-left scale-x-0 bg-lime" />
+        <div aria-hidden="true" className="mt-4 h-0.5 w-full overflow-hidden rounded bg-ink/10">
+          <div ref={progressRef} className="h-full origin-left scale-x-0 bg-coral" />
         </div>
         <ul className="mt-4 space-y-2.5 text-sm">
           {headings.map((h) => (
             <li key={h.id} className={h.level === 3 ? "pl-3" : ""}>
               <a
                 href={`#${h.id}`}
-                className={`transition-colors ${activeId === h.id ? "text-lime" : "text-slate hover:text-soft"}`}
+                className={`transition-colors ${activeId === h.id ? "text-accent-deep" : "text-slate hover:text-ink"}`}
               >
                 {h.text}
               </a>

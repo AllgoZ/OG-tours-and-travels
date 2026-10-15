@@ -13,19 +13,17 @@ import { MobileNavigation } from "./MobileNavigation";
 export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string>("top");
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuId = useId();
 
-  // Solid-on-scroll + auto-hide: slide the header up on scroll down, bring it back on scroll up.
+  // Auto-hide: slide the header up on scroll down, bring it back on scroll up.
   useEffect(() => {
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 8);
       if (y > lastY && y > 96) setHidden(true);
       else if (y < lastY) setHidden(false);
       lastY = y;
@@ -85,7 +83,6 @@ export function Header() {
   const isActive = (match: string) =>
     match === "blog-route" ? pathname.startsWith("/blog") : isHome && active === match;
 
-  const solid = scrolled || open || !isHome;
   const waLink = whatsappHref(buildEnquiryMessage({}));
 
   return (
@@ -93,7 +90,7 @@ export function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-[translate,background-color,border-color] duration-300 ${
           hidden && !open ? "-translate-y-full" : "translate-y-0"
-        } ${solid ? "border-b border-white/10 bg-midnight/90 backdrop-blur-md" : "border-b border-transparent"}`}
+        } on-night border-b border-white/10 bg-[#0d5b70] shadow-sm`}
       >
       <div className="container-x flex h-[4.5rem] items-center justify-between gap-3 lg:h-[4.75rem]">
         <Link
@@ -116,13 +113,13 @@ export function Header() {
                     href={link.href}
                     aria-current={act ? "page" : undefined}
                     className={`relative inline-flex min-h-11 items-center px-3.5 text-[0.9rem] font-medium transition-colors ${
-                      act ? "text-soft" : "text-slate hover:text-soft"
+                      act ? "text-ink" : "text-slate hover:text-ink"
                     }`}
                   >
                     {link.label}
                     <span
                       aria-hidden="true"
-                      className={`absolute inset-x-3.5 bottom-1.5 h-px origin-left bg-lime transition-transform duration-300 ${
+                      className={`absolute inset-x-3.5 bottom-1.5 h-px origin-left bg-coral transition-transform duration-300 ${
                         act ? "scale-x-100" : "scale-x-0"
                       }`}
                     />
@@ -146,7 +143,7 @@ export function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Enquire on WhatsApp (opens in a new tab)"
-              className="inline-flex size-11 items-center justify-center rounded-control bg-lime text-ink transition-colors hover:bg-[#d4ff82] active:scale-95 lg:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-control bg-wa text-white transition-colors hover:bg-wa-hover active:scale-95 lg:hidden"
             >
               <MessageCircle aria-hidden="true" className="size-5" />
             </a>
@@ -158,7 +155,7 @@ export function Header() {
             aria-controls={menuId}
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex size-11 items-center justify-center rounded-control border border-white/15 text-soft transition-colors hover:border-white/40 lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-control border border-ink/15 text-ink transition-colors hover:border-ink/40 lg:hidden"
           >
             {open ? <X aria-hidden="true" className="size-5" /> : <Menu aria-hidden="true" className="size-5" />}
           </button>

@@ -24,7 +24,7 @@ interface CtaLinkProps {
 export function CtaLink({
   kind,
   children,
-  variant = "lime",
+  variant,
   size = "lg",
   className = "",
   topic,
@@ -34,7 +34,7 @@ export function CtaLink({
 }: CtaLinkProps) {
   const Icon = kind === "whatsapp" ? MessageCircle : Phone;
   const icon = hideIcon ? null : <Icon aria-hidden="true" className="size-[1.15em] shrink-0" />;
-  const classes = buttonClass(variant, size, className);
+  const classes = buttonClass(variant ?? (kind === "whatsapp" ? "whatsapp" : "accent"), size, className);
 
   const href =
     kind === "whatsapp"

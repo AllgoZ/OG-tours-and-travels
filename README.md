@@ -1,7 +1,7 @@
 # OG TOURS AND TRAVELS — website
 
-Premium, mobile-first site for OG TOURS AND TRAVELS (group travel and Force Urbania vehicle hire),
-with a cinematic dark-first design, real motion, and an SEO travel blog. The goal is enquiries by
+Clean, minimal, mobile-first site for OG TOURS AND TRAVELS (group travel and Force Urbania vehicle hire),
+with a teal/navy and amber logistics-style design, real motion, and an SEO travel blog. The goal is enquiries by
 **WhatsApp or phone**; there is no backend.
 
 - **Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Lucide icons
@@ -30,22 +30,26 @@ TypeScript config).
 
 ## Design system
 
-Tokens live once in `src/app/globals.css` under `@theme`. Dark-first, with light editorial
-sections alternating against immersive dark ones.
+Tokens live once in `src/app/globals.css` under `@theme` (some names are legacy from earlier
+themes; the comment at the top of that file maps them). The look is a clean "logistics" theme:
+a deep teal→navy gradient for the hero, final CTA, footer and header, with white and pale-blue
+sections between.
 
 | Token | Value | Use |
 |---|---|---|
-| `midnight` | `#10141B` | primary dark background |
-| `graphite` | `#1B2028` | secondary dark background |
-| `soft` | `#F5F6F8` | text on dark |
-| `slate` | `#929BA8` | muted text on dark |
-| `lime` | `#C6F36B` | **accent only** — buttons, markers, lines (text on lime is always ink) |
-| `light` | `#ECEFF2` | light section background |
-| `ink` | `#10141B` | text on light |
+| `ink` | `#0C3B4E` | headings / text (white inside `.surface-night`) |
+| `slate` | `#4A5F6C` | secondary text |
+| `midnight` / `graphite` | `#FFFFFF` | page background, header-less surfaces, drawer |
+| `light` | `#EEF4F7` | alternate (pale blue) sections |
+| `accent` | `#F5B50A` | amber primary buttons (text on it is `navy` `#0A2F40`) |
+| `wa` | `#178A43` | green WhatsApp buttons (white text) |
+| `accent-deep` | `#1B7F57` | green eyebrows/links (amber inside `.surface-night`) |
+| `coral` | `#F5B50A` | thin lines and progress |
 
 Fonts: **Space Grotesk** (headings), **Inter** (body), **Instrument Serif** (accent words),
-all self-hosted via `next/font`. Surface helpers: `.surface-dark`, `.surface-graphite`,
-`.surface-light`, `.grain`. Buttons: `buttonClass()` in `src/components/ui/buttonStyles.ts`.
+all self-hosted via `next/font`. Surface helpers: `.surface-night` (teal→navy gradient, also
+`.on-night` for just the light-text variables), `.surface-dark` / `.surface-graphite` (white),
+`.surface-light` (pale blue). Buttons: `buttonClass()` in `src/components/ui/buttonStyles.ts`.
 
 ## Business details (the one file to edit)
 
@@ -110,8 +114,8 @@ src/
   app/                 layout · page · privacy · not-found · robots.ts · sitemap.ts
                        blog/ (page · page/[n] · [slug] · feed.xml)
   components/
-    layout/            Header · MobileNavigation · MobileContactBar · Footer · ScrollProgress · CurrentYear · DevConfigNotice
-    sections/          Hero · ValueStrip · VehicleShowcase(+Gallery) · Services · Benefits · BookingSteps(+TripEnquiryForm)
+    layout/            Header · MobileNavigation · MobileContactBar · Footer · CurrentYear · DevConfigNotice
+    sections/          Hero · VehicleShowcase(+Gallery) · Services · BookingSteps(+TripEnquiryForm)
                        Destinations · LatestStories · FAQ · FinalCTA
     blog/              BlogListing · ArticleCard · Breadcrumbs · TableOfContents
     ui/                CtaLink · buttonStyles · Accordion · Reveal · Logo · SectionHeading

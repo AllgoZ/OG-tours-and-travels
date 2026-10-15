@@ -21,11 +21,11 @@ export function SectionHeading({
     <div className={className}>
       {eyebrow && (
         <p className="text-eyebrow flex items-center gap-3">
-          <span aria-hidden="true" className="h-px w-8 bg-lime" />
+          <span aria-hidden="true" className="h-px w-8 bg-coral" />
           <span className={dark ? "text-slate" : "text-ink/72"}>{eyebrow}</span>
         </p>
       )}
-      <h2 id={id} className={`text-h2 mt-5 ${dark ? "text-soft" : "text-ink"}`}>
+      <h2 id={id} className={`text-h2 mt-5 text-ink`}>
         {title}
       </h2>
       {intro && (

@@ -67,13 +67,12 @@ export function VehicleGallery() {
   };
 
   const arrow =
-    "inline-flex size-11 items-center justify-center rounded-full border border-white/25 text-soft " +
-    "transition-colors hover:border-lime hover:text-lime disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/25 disabled:hover:text-soft";
+    "inline-flex size-11 items-center justify-center rounded-full border border-ink/25 text-ink " +
+    "transition-colors hover:border-coral hover:text-accent-deep disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-ink/25 disabled:hover:text-ink";
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between gap-4">
-        <p className="text-xs uppercase tracking-[0.18em] text-slate">Swipe or use the arrows</p>
+      <div className="mb-4 flex items-center justify-end gap-4">
         <div className="flex gap-2">
           <button type="button" className={arrow} onClick={() => page(-1)} disabled={edge.start} aria-label="Previous photos">
             <ChevronLeft aria-hidden="true" className="size-5" />
@@ -95,7 +94,7 @@ export function VehicleGallery() {
         {slides.map((slide) => (
           <li key={slide.caption} className="shrink-0 snap-start">
             <figure>
-              <div className="flex h-[15rem] items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] px-4 sm:h-[19rem] lg:h-[23rem]">
+              <div className="flex h-[15rem] items-center justify-center overflow-hidden rounded-xl border border-ink/10 bg-white/60 px-4 sm:h-[19rem] lg:h-[23rem]">
                 <Image
                   src={slide.src}
                   alt={slide.alt}

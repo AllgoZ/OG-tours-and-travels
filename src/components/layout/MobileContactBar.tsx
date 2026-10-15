@@ -33,7 +33,7 @@ export function MobileContactBar() {
   // must not swallow clicks in its empty middle — only the buttons are interactive.
   const fab =
     "pointer-events-auto group-data-[hidden=true]:pointer-events-none inline-flex size-13 items-center " +
-    "justify-center rounded-full shadow-[0_8px_24px_-6px_rgba(0,0,0,0.6)] transition-transform active:scale-95";
+    "justify-center rounded-full shadow-[0_8px_24px_-6px_rgba(33,56,67,0.22)] transition-transform active:scale-95";
 
   return (
     <div
@@ -44,7 +44,7 @@ export function MobileContactBar() {
       style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
     >
       {tel && (
-        <a href={tel} aria-label="Call us" className={`${fab} border border-white/20 bg-midnight/90 text-soft backdrop-blur-md active:bg-white/10`}>
+        <a href={tel} aria-label="Call us" className={`${fab} border border-ink/15 bg-midnight text-ink active:bg-ink/10`}>
           <Phone aria-hidden="true" className="size-5" />
         </a>
       )}
@@ -54,7 +54,7 @@ export function MobileContactBar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Enquire on WhatsApp (opens in a new tab)"
-          className={`${fab} ml-auto bg-lime text-ink active:brightness-95`}
+          className={`${fab} ml-auto bg-wa text-white active:brightness-95`}
         >
           <MessageCircle aria-hidden="true" className="size-6" />
         </a>

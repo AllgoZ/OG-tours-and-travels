@@ -25,7 +25,7 @@ function Stars({ rating }: { rating: number }) {
         <Star
           key={i}
           aria-hidden="true"
-          className={`size-4 ${i < r ? "fill-[#FFC53D] text-[#FFC53D]" : "fill-white/10 text-white/10"}`}
+          className={`size-4 ${i < r ? "fill-[#FFC53D] text-[#FFC53D]" : "fill-ink/15 text-ink/15"}`}
         />
       ))}
     </div>
@@ -34,18 +34,18 @@ function Stars({ rating }: { rating: number }) {
 
 function ReviewCard({ review }: { review: Review }) {
   return (
-    <article className="flex w-[19rem] shrink-0 flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:w-[21rem]">
+    <article className="flex w-[19rem] shrink-0 flex-col rounded-2xl border border-ink/10 bg-white/60 p-6 sm:w-[21rem]">
       <div className="flex items-center justify-between">
         <Stars rating={review.rating} />
         <GoogleG />
       </div>
-      <p className="mt-4 line-clamp-5 text-sm leading-relaxed text-soft/85">{review.text}</p>
-      <div className="mt-5 flex items-center gap-3 border-t border-white/10 pt-4">
-        <span className="inline-flex size-9 items-center justify-center rounded-full bg-white/10 font-heading text-sm font-bold text-soft">
+      <p className="mt-4 line-clamp-5 text-sm leading-relaxed text-ink/85">{review.text}</p>
+      <div className="mt-5 flex items-center gap-3 border-t border-ink/10 pt-4">
+        <span className="inline-flex size-9 items-center justify-center rounded-full bg-ink/10 font-heading text-sm font-bold text-ink">
           {review.author.trim().charAt(0).toUpperCase()}
         </span>
         <div>
-          <p className="text-sm font-semibold text-soft">{review.author}</p>
+          <p className="text-sm font-semibold text-ink">{review.author}</p>
           <p className="text-xs text-slate">{review.date ? `${review.date} · ` : ""}Posted on Google</p>
         </div>
       </div>
@@ -64,7 +64,7 @@ export function GoogleReviews() {
   const reviewsUrl = business.googleBusinessProfileUrl;
 
   return (
-    <section aria-labelledby="reviews-title" className="grain surface-dark section-y overflow-hidden">
+    <section aria-labelledby="reviews-title" className="surface-dark section-y overflow-hidden">
       <div className="container-x">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -78,7 +78,7 @@ export function GoogleReviews() {
                 href={reviewsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-soft transition-colors hover:text-lime"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-accent-deep"
               >
                 <GoogleG className="size-4" />
                 See all reviews on Google
@@ -89,7 +89,7 @@ export function GoogleReviews() {
         </Reveal>
 
         {hasSamples && (
-          <p className="mt-4 inline-block rounded-control border border-lime/40 bg-lime/10 px-3 py-2 text-sm text-lime">
+          <p className="mt-4 inline-block rounded-control border border-accent/30 bg-accent/10 px-3 py-2 text-sm text-accent-deep">
             Sample reviews shown in development — add your real Google reviews in
             <code className="mx-1">src/config/business.ts</code>. Only verified reviews appear on the live site.
           </p>

@@ -5,7 +5,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileContactBar } from "@/components/layout/MobileContactBar";
 import { DevConfigNotice } from "@/components/layout/DevConfigNotice";
-import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { SITE_DESCRIPTION, SITE_TITLE, getSiteUrl } from "@/lib/site";
 import "./globals.css";
@@ -71,7 +70,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover", // enables env(safe-area-inset-*) for the mobile contact bar
-  themeColor: "#10141B",
+  themeColor: "#0D5B70",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -84,11 +83,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-dvh">
         <a
           href="#main"
-          className="sr-only z-[80] rounded-control bg-lime px-4 py-3 font-semibold text-ink focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
+          className="sr-only z-[80] rounded-control bg-accent px-4 py-3 font-semibold text-navy focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
         >
           Skip to main content
         </a>
-        <ScrollProgress />
         <Header />
         <main id="main">{children}</main>
         <Footer />

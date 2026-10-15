@@ -6,7 +6,7 @@ Web-ready crops are generated from them by `npm run images` into `src/assets/ima
 | Original (`assets/originals/`) | Web asset(s) | Placement |
 |---|---|---|
 | `three-quarter-hero.jpg` (WhatsApp Image …1.14.08 PM) | `hero.jpg` (crop; timestamp removed) | Vehicle gallery ("On the road"); `blog-group-road-trip.jpg` cover |
-| `front-straight.jpg` (…1.14.07 PM (2)) | `front.jpg`, `front-detail.jpg` | Final CTA + "Why OG" background (`front-detail`); `blog-family-checklist.jpg` cover |
+| `front-straight.jpg` (…1.14.07 PM (2)) | `front.jpg` | Gallery front photo; `blog-family-checklist.jpg` cover |
 | `cutout-side.png` (Dark Gray Stag Graphic Minibus Cutout) | `cutout-side.png` (trimmed) | **Hero** (layered behind the headline); vehicle showcase; gallery; social image; `blog-weddings-events.jpg` cover |
 | `cutout-front.png` (Urbania Van Front View) | `cutout-front.png` (trimmed) | Vehicle gallery ("Front"); `blog-urbania-rental.jpg` cover |
 | `cutout-rear.png` (Dark Gray Force Urbania Rear Cutout) | `cutout-rear.png` (trimmed) | Vehicle gallery ("Rear"); `blog-multiple-passengers.jpg` cover; **featured blog cover** |
@@ -24,7 +24,7 @@ in the vehicle gallery and as the featured article cover.
 
 ## Rules followed
 
-- Crops only, no retouching, no AI-generated vehicles: the real van, plate (TN94 X 8971) and
+- Crops only, no retouching, no AI-generated vehicles: the real van (number plate painted out by `npm run images`) and
   decals are untouched.
 - Camera timestamp overlays ("Galaxy S24 Ultra / date") were removed by cropping them out of frame.
 - The vehicle is never cropped at the front, wheels or roof: cut-outs are shown contained

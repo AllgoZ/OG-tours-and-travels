@@ -1,4 +1,4 @@
-export type ButtonVariant = "lime" | "light" | "dark" | "outline-dark" | "outline-light";
+export type ButtonVariant = "accent" | "whatsapp" | "light" | "dark" | "outline-dark" | "outline-light";
 export type ButtonSize = "md" | "lg";
 
 const base =
@@ -7,10 +7,11 @@ const base =
   "duration-200 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100";
 
 const variants: Record<ButtonVariant, string> = {
-  lime: "bg-lime text-ink border border-transparent hover:bg-[#d4ff82]",
-  light: "bg-soft text-ink border border-transparent hover:bg-white",
-  dark: "bg-ink text-soft border border-transparent hover:bg-graphite-2",
-  "outline-dark": "bg-transparent text-soft border border-white/25 hover:border-lime hover:text-lime",
+  accent: "bg-accent text-navy border border-transparent hover:bg-accent-hover",
+  whatsapp: "bg-wa text-white border border-transparent hover:bg-wa-hover",
+  light: "bg-white text-ink border border-ink/10 hover:bg-soft",
+  dark: "bg-ink text-white border border-transparent hover:bg-ink/90",
+  "outline-dark": "bg-transparent text-ink border border-ink/30 hover:border-ink hover:bg-ink/[0.05]",
   "outline-light": "bg-transparent text-ink border border-ink/25 hover:border-ink hover:bg-ink/[0.04]",
 };
 
@@ -20,7 +21,7 @@ const sizes: Record<ButtonSize, string> = {
 };
 
 export function buttonClass(
-  variant: ButtonVariant = "lime",
+  variant: ButtonVariant = "accent",
   size: ButtonSize = "lg",
   extra = "",
 ): string {

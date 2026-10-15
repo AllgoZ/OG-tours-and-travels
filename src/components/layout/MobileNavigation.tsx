@@ -30,12 +30,12 @@ export function MobileNavigation({ id, open, isActive, onNavigate }: MobileNavig
       <div
         aria-hidden="true"
         onClick={onNavigate}
-        className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 bg-ink/35 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
       />
 
       {/* Drawer panel */}
       <div
-        className={`absolute inset-y-0 right-0 flex w-[86%] max-w-sm flex-col border-l border-white/10 bg-graphite shadow-[-24px_0_60px_-20px_rgba(0,0,0,0.6)] transition-transform duration-300 ease-out ${
+        className={`absolute inset-y-0 right-0 flex w-[86%] max-w-sm flex-col border-l border-ink/10 bg-graphite shadow-[-24px_0_60px_-20px_rgba(33,56,67,0.22)] transition-transform duration-300 ease-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -45,7 +45,7 @@ export function MobileNavigation({ id, open, isActive, onNavigate }: MobileNavig
         >
           <ul className="flex flex-col">
             {NAV_LINKS.map((link, i) => (
-              <li key={link.href} className="border-b border-white/10">
+              <li key={link.href} className="border-b border-ink/10">
                 <Link
                   href={link.href}
                   onClick={onNavigate}
@@ -53,7 +53,7 @@ export function MobileNavigation({ id, open, isActive, onNavigate }: MobileNavig
                   style={{ transitionDelay: open ? `${120 + i * 55}ms` : "0ms" }}
                   className={`flex min-h-16 items-center gap-4 text-2xl font-semibold tracking-tight transition-all duration-500 ${
                     open ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"
-                  } ${isActive(link.match) ? "text-lime" : "text-soft"}`}
+                  } ${isActive(link.match) ? "text-accent-deep" : "text-ink"}`}
                 >
                   <span className="font-heading text-xs text-slate tabular-nums">0{i + 1}</span>
                   {link.label}
