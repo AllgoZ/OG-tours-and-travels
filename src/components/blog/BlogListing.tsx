@@ -1,10 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/blog/Breadcrumbs";
 import { ArticleCard } from "@/components/blog/ArticleCard";
-import { coverImage } from "@/lib/blog-covers";
-import { formatDate, type PostSummary } from "@/lib/blog";
+import { CoverImage } from "./CoverImage";
+import { formatDate, type PostSummary } from "@/lib/blog-core";
 
 interface BlogListingProps {
   description: string;
@@ -36,8 +35,10 @@ export function BlogListing({ description, featured, posts, currentPage, totalPa
             className="group grid gap-6 overflow-hidden rounded-2xl border border-ink/10 lg:grid-cols-2 lg:items-stretch"
           >
             <div className="aspect-[16/10] overflow-hidden lg:aspect-auto">
-              <Image
-                src={coverImage(featured.cover)}
+              <CoverImage
+                cover={featured.cover}
+                coverWidth={featured.coverWidth}
+                coverHeight={featured.coverHeight}
                 alt={featured.coverAlt}
                 priority
                 quality={80}
@@ -68,6 +69,11 @@ export function BlogListing({ description, featured, posts, currentPage, totalPa
 
       <div className="container-x pb-24">
         <h2 className="sr-only">Articles</h2>
+        {!featured && posts.length === 0 && (
+          <p className="max-w-xl text-slate">
+            New travel guides are on the way. In the meantime, message us on WhatsApp or call and we will help plan your trip.
+          </p>
+        )}
         <ul className="grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <li key={post.slug}>

@@ -1,5 +1,6 @@
-/** Renders one or more JSON-LD nodes. `<` is escaped so no payload string can close the tag. */
+import { serializeJsonLd } from "@/lib/seo";
+
+/** Renders one or more JSON-LD nodes. The serializer escapes `<`, `>`, `&` and U+2028/9 so no payload string can close the tag. */
 export function JsonLd({ data }: { data: Record<string, unknown> | Record<string, unknown>[] }) {
-  const json = JSON.stringify(data).replace(/</g, "\\u003c");
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }} />;
 }

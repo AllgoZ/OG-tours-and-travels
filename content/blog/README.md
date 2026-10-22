@@ -1,5 +1,10 @@
 # Blog content
 
+> **Source of truth is now Supabase** (see `docs/supabase-blog.md`). These Markdown files are the import
+> source (`npm run blog:import`) and the rollback source (`BLOG_SOURCE=markdown`); editing a file here does not change the
+> live site unless you re-import (`-- --apply --overwrite`) or switch the source. Do not delete them until production on
+> Supabase is verified.
+
 Articles are Markdown files in this folder. One file = one post; the filename (without `.md`)
 is the URL slug: `content/blog/my-post.md` → `/blog/my-post`.
 

@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { coverImage } from "@/lib/blog-covers";
-import { formatDate, type PostSummary } from "@/lib/blog";
+import { CoverImage } from "./CoverImage";
+import { formatDate, type PostSummary } from "@/lib/blog-core";
 
 interface ArticleCardProps {
   post: PostSummary;
@@ -18,8 +17,10 @@ export function ArticleCard({ post, priority }: ArticleCardProps) {
         className="relative block overflow-hidden rounded-xl border border-ink/10"
       >
         <div className="aspect-[16/10] overflow-hidden">
-          <Image
-            src={coverImage(post.cover)}
+          <CoverImage
+            cover={post.cover}
+            coverWidth={post.coverWidth}
+            coverHeight={post.coverHeight}
             alt={post.coverAlt}
             priority={priority}
             loading={priority ? undefined : "lazy"}

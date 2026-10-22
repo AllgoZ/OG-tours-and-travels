@@ -4,6 +4,8 @@
 # Windows (Git Bash) friendly: stops any running node server first.
 taskkill //F //IM node.exe >/dev/null 2>&1 || true
 export NEXT_PUBLIC_SITE_URL=https://qa.example.test
+# Keep Google Tag Manager out of QA runs (no analytics hits, no external requests).
+export NEXT_PUBLIC_GTM_ID=off
 npm run build >/dev/null 2>&1 || { echo "build failed"; exit 1; }
 (npx next start -p 3100 >/dev/null 2>&1 &)
 sleep 4

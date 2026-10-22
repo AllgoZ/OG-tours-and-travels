@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
   // No confirmed production domain yet: ask crawlers to stay out (staging / preview safety).
   if (!url) return { rules: { userAgent: "*", disallow: "/" } };
   return {
-    rules: { userAgent: "*", allow: "/" },
+    rules: { userAgent: "*", allow: "/", disallow: ["/admin"] }, // the CMS is also noindex via header + meta
     sitemap: `${url}/sitemap.xml`,
     host: url,
   };

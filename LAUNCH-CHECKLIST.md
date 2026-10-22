@@ -30,8 +30,9 @@ throughout (WhatsApp enquiries vs phone calls).
       `verified: true` on each. The scrolling reviews section is hidden on the live site until there is
       at least one verified review (the sample entries only show in `npm run dev`). **Do not invent
       reviews.** Set `googleBusinessProfileUrl` so the "See all reviews on Google" link works.
-- [ ] **Review the five blog articles** and set `reviewStatus: approved` in each one's frontmatter.
-      While flagged, each shows an "example article — pending review" note.
+- [ ] **Provision the CMS administrator** and turn off public sign-ups in Supabase Auth (`docs/admin-cms.md` §1–2).
+- [ ] **Review the five blog articles**, then approve and publish each in the CMS (`/admin`). Unapproved articles are not public at all
+      (404, not in sitemap/RSS); with none approved `/blog` stays `noindex`.
 
 ## Optional
 
@@ -39,7 +40,9 @@ throughout (WhatsApp enquiries vs phone calls).
 - [ ] **Destinations** the business genuinely serves → the Destinations section appears once
       `destinations` has entries.
 - [ ] Privacy policy: review [`src/app/privacy/page.tsx`](src/app/privacy/page.tsx) with the owner
-      (it describes a site with no analytics and no data stored); set `privacyUpdated`.
+      (it now discloses Google Tag Manager while that is active); set `privacyUpdated`.
+- [ ] Google Tag Manager (installed, production + domain only): in the GTM container add and publish the tags,
+      set up consent handling for the audience, and use Preview/Tag Assistant on the live domain to confirm it fires.
 - [ ] FAQ wording in [`src/content/faq.ts`](src/content/faq.ts): add real policies (cancellation,
       advance payment, etc.) **only if** the owner confirms them.
 
@@ -57,7 +60,9 @@ throughout (WhatsApp enquiries vs phone calls).
 
 ## Before pressing "go"
 
-- [ ] `npm run check:launch -- --strict` passes (domain set)
+- [ ] `npm run check:launch -- --strict` passes (domain + Supabase variables set)
+- [ ] Hosting env has `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (and **not** `DATABASE_URL`)
+- [ ] Rotate any credential that was ever pasted into chat/email (database password, JWT secret) — see `docs/supabase-blog.md`
 - [ ] `npm run lint && npm run typecheck && npm run build` pass
 - [ ] Click every WhatsApp / call button on a real phone; submit the trip form and confirm the
       WhatsApp message contains pickup, destination, date, **time**, passengers and requirements

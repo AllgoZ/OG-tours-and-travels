@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Heading } from "@/lib/blog";
+import type { Heading } from "@/lib/blog-core";
 
 /** Sticky table of contents with scroll-spy and a accent reading-progress bar. */
 export function TableOfContents({ headings }: { headings: Heading[] }) {

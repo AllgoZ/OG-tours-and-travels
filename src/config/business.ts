@@ -20,6 +20,14 @@ const clean = (value: string | undefined): string | null => {
   return v ? v : null;
 };
 
+const DEFAULT_GTM_ID = "GTM-K42Z4THV";
+/** Unset ⇒ the owner's container; "off" ⇒ disabled; anything else is an override (validated in lib/gtm.ts). */
+const gtmFromEnv = (value: string | undefined): string | null => {
+  const v = clean(value);
+  if (v === null) return DEFAULT_GTM_ID;
+  return v.toLowerCase() === "off" ? null : v;
+};
+
 export interface Service {
   id: string;
   title: string;
@@ -162,6 +170,16 @@ export const business = {
       verified: false,
     },
   ] as Review[],
+
+  analytics: {
+    /**
+     * Google Tag Manager container ID (a public identifier, not a secret). Loaded on the public
+     * pages only — never on /admin — and only in production builds with a production domain set
+     * (see lib/gtm.ts). NEXT_PUBLIC_GTM_ID overrides it (e.g. a staging container); set it to
+     * "off" to disable GTM entirely.
+     */
+    gtmId: gtmFromEnv(process.env.NEXT_PUBLIC_GTM_ID),
+  },
 
   /** CONFIRM — Privacy Policy last-updated date shown on /privacy (ISO date). */
   privacyUpdated: null as string | null,

@@ -6,8 +6,8 @@ import { ArticleCard } from "@/components/blog/ArticleCard";
 import { getAllPosts } from "@/lib/blog";
 import { SECTION } from "@/lib/site";
 
-export function LatestStories() {
-  const posts = getAllPosts().slice(0, 3);
+export async function LatestStories() {
+  const posts = (await getAllPosts()).slice(0, 3);
   if (posts.length === 0) return null;
 
   return (
