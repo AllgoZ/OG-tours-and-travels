@@ -9,10 +9,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const published = await getAllPosts();
 
+  // Most recent editorial change among published articles. The home page ("Latest stories") and the
+  // journal index change whenever an article does; with no articles there is no honest date, so omit it.
+  const newest = published.reduce<Date | null>((latest, post) => {
+    const d = new Date(post.updated ?? post.date);
+    return !latest || d > latest ? d : latest;
+  }, null);
+
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${url}/`, changeFrequency: "monthly", priority: 1 },
+    { url: `${url}/`, ...(newest && { lastModified: newest }), changeFrequency: "weekly", priority: 1 },
     // The journal index is only listed once it has an article (an empty index is noindex).
-    ...(published.length > 0 ? [{ url: `${url}/blog`, changeFrequency: "weekly" as const, priority: 0.7 }] : []),
+    ...(published.length > 0
+      ? [{ url: `${url}/blog`, ...(newest && { lastModified: newest }), changeFrequency: "weekly" as const, priority: 0.8 }]
+      : []),
     { url: `${url}/privacy`, changeFrequency: "yearly", priority: 0.2 },
   ];
 

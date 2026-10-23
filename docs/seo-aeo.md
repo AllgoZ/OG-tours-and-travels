@@ -102,3 +102,16 @@ Per the one-third-party-script rule the `gtag.js` snippet is **not** pasted into
 Production domain: the stream URL implies **`https://www.ogtravels.in`**. It is set only through the host env var `NEXT_PUBLIC_SITE_URL` (Vercel **Production** only, type Config) — not hard-coded — and GTM/GA load only once it is set. Set it on Production, redeploy, then verify.
 
 Not yet done: setting `NEXT_PUBLIC_SITE_URL`, the GTM tag/publish, Search Console, the Google Business Profile.
+
+## Local SEO — Oddanchatram and Dindigul (2026-10-23)
+
+Four location-focused articles (Palani/Kodaikanal group trip, Dindigul sightseeing, airport/station transfers, weddings and temple visits) were added as
+**hidden drafts needing business review** — see `docs/local-seo-plan.md` for the plan, search intents, internal-link map and owner to-dos.
+Design choices: each article answers one question, has a visible FAQ-style section, links to the others and to `/#enquire`; distances are approximate
+and say so; no prices, fleet size or claims about the business that the config does not hold.
+
+* **Sitemap** (`src/app/sitemap.ts`): home and `/blog` carry `lastModified` = newest published article (omitted when there are none); `/blog`
+  appears only once an article is public; paginated `/blog/page/n` (noindex) and `/admin` never appear. Google ignores `priority`/`changefreq`; they are harmless hints.
+* **robots.txt** (`src/app/robots.ts`): unchanged — allow all, `Disallow: /admin`, `Sitemap:` and `host` once the domain is set; `Disallow: /` before that. CSS/JS/images are not blocked.
+  AI-crawler rules remain a business decision (see above).
+* Strongest remaining local signal: confirm and fill `serviceArea` / `areaServed` in `src/config/business.ts` (feeds `TravelAgency` JSON-LD), then the Google Business Profile.

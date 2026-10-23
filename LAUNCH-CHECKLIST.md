@@ -31,7 +31,7 @@ throughout (WhatsApp enquiries vs phone calls).
       at least one verified review (the sample entries only show in `npm run dev`). **Do not invent
       reviews.** Set `googleBusinessProfileUrl` so the "See all reviews on Google" link works.
 - [ ] **Provision the CMS administrator** and turn off public sign-ups in Supabase Auth (`docs/admin-cms.md` §1–2).
-- [ ] **Review the five blog articles**, then approve and publish each in the CMS (`/admin`). Unapproved articles are not public at all
+- [ ] **Review the nine blog articles** (five starter + four Oddanchatram/Dindigul guides, see `docs/local-seo-plan.md`), then approve and publish each in the CMS (`/admin`). Unapproved articles are not public at all
       (404, not in sitemap/RSS); with none approved `/blog` stays `noindex`.
 
 ## Optional

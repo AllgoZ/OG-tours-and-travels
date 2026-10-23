@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-23 15:45 IST (UTC+05:30)**
+> **Last updated: 2026-10-23 16:25 IST (UTC+05:30)**
 
 # Handover — OG Tours and Travels website
 
@@ -95,7 +95,7 @@ Run `npm run check:launch` for the live list. Summary:
 - [ ] **GA4** (property exists: stream OG TRAVELS, Measurement ID `G-JMDL8MDC6E`): add a Google tag with that ID **inside the GTM container** (Initialization – All Pages), Preview, publish; check GA4 Realtime. The raw `gtag.js` snippet is deliberately **not** in the code (CLAUDE.md rule 8) — it would double-count. Details: `docs/seo-aeo.md`.
 - [ ] **Supabase Auth hardening** (Dashboard): turn **off public sign-ups**, min password length ≥ 12, review rate limits, set Site URL (`docs/admin-cms.md` §1).
 - [ ] **Change the admin password** and **rotate** the database password + JWT secret that were shared in chat.
-- [ ] **Review the 5 starter articles** with the owner, then in `/admin` approve and publish each. Until then **no article is public**, `/blog` is `noindex` and out of the sitemap.
+- [ ] **Review the 9 draft articles** (5 starter + 4 local: Oddanchatram/Dindigul) with the owner, then in `/admin` approve and publish each. Until then **no article is public**, `/blog` is `noindex` and out of the sitemap.
 - [ ] Add **real Google reviews** to `reviews` with `verified: true` (never invent; the section is hidden until there is one).
 - [ ] Confirm **services**, add **vehicle specs**, **service area**, **address**, **Google Business Profile** URL if desired; review the **privacy policy** and set `privacyUpdated`.
 - [ ] Production deploy: run `npm run db:migrate` against production, set the three env vars on the host (not `DATABASE_URL`), build with `check:launch --strict && build`, smoke-test the CMS (`docs/admin-cms.md` §11).
@@ -184,6 +184,7 @@ After launch: validate in Google's Rich Results Test, submit `sitemap.xml` in Se
 
 ## 9. Recent change history (newest first)
 
+- **2026-10-23 — Local SEO pass (Oddanchatram / Dindigul):** four new articles in `content/blog/` (`oddanchatram-palani-kodaikanal-group-trip`, `dindigul-sightseeing-group-tour`, `madurai-airport-dindigul-oddanchatram-transfers`, `group-vehicle-weddings-temple-visits-dindigul-district`), imported into Supabase as **hidden drafts needing business review** (9 posts, 0 public). Sitemap now gives the home page and `/blog` a `lastModified` (newest article) and no longer lists `/blog` until an article is public; robots.txt unchanged (already optimal for the gate). New `tests/sitemap-robots.test.ts`; hard-coded article counts in two tests updated 5→9. Checks: lint + typecheck clean, build passes, 170 offline tests pass; the 18 live-DB tests could NOT be verified this session — two orphaned test sessions from an interrupted run (pids 366280 and 367158, "idle in transaction") hold locks on `auth.users`; end them in Supabase (Database → Query performance / SQL: `select pg_terminate_backend(pid) …`) or wait for the pooler to drop them, then re-run `npm test`. Plan and owner to-dos: `docs/local-seo-plan.md`. Distances in the articles are approximate (public sources) — owner to verify; `serviceArea`/`areaServed` still empty until confirmed.
 - **2026-10-23 — GA4 recorded:** Measurement ID `G-JMDL8MDC6E` (stream OG TRAVELS, `https://www.ogtravels.in`). Decision: GA4 is delivered via the existing GTM container, no code change; docs updated (`docs/seo-aeo.md`, `LAUNCH-CHECKLIST.md`, this file) with the GTM steps and the intended production domain. Not yet done: GTM tag + publish, `NEXT_PUBLIC_SITE_URL` on Vercel.
 - **2026-10-22 — pushed to GitHub:** commit `19e6908` ("Add admin CMS, Supabase-backed journal and Google Tag Manager") on `main` contains all CMS, Supabase and GTM work. Vercel deploy guidance added (§8): env vars as Config type, Node 22+/24, build command.
 - **2026-10-22 — Google Tag Manager installed** (container `GTM-K42Z4THV`): `GoogleTagManager` component in `SiteChrome`, `lib/gtm.ts` gate (production + domain set + valid ID), `business.analytics.gtmId`, `NEXT_PUBLIC_GTM_ID`, conditional privacy wording, `admin/not-found.tsx`, launch-check item, `tests/gtm.test.ts` (179 tests). Verified in a browser: `gtm.js` requested and `dataLayer` initialised on public pages, absent on `/admin`.

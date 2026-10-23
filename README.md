@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-22 16:37 IST (UTC+05:30)**
+> **Last updated: 2026-10-23 16:25 IST (UTC+05:30)**
 
 # OG TOURS AND TRAVELS — website + admin CMS
 
@@ -113,7 +113,7 @@ Public pages: `/blog` (listing), `/blog/page/[n]` (overflow), `/blog/[slug]` (ar
 renamed slug ⇒ 308 redirect), `/blog/feed.xml` (RSS).
 
 A post is **public only when** `draft = false`, `review_status = 'approved'` and `published_at <= now()` (enforced by RLS; a database constraint also makes
-"live ⇒ approved"). The five starter articles were imported as drafts awaiting business review, so **none is public yet**.
+"live ⇒ approved"). The nine articles (five starter + four Oddanchatram/Dindigul guides) were imported as drafts awaiting business review, so **none is public yet**.
 
 **Use the CMS:** sign in at `/admin/login` → write/edit → *Mark as reviewed & approved* (explicit confirmation) → *Publish*. Saving a draft never publishes.
 Publishing refreshes the affected public pages on demand — no rebuild (single-instance/Vercel; otherwise redeploy). Full guide: [`docs/admin-cms.md`](docs/admin-cms.md).

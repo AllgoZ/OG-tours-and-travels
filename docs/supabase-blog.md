@@ -103,7 +103,7 @@ draft = false  AND  review_status = 'approved'  AND  published_at <= now()
 
 ## Review and publish a post
 
-All five imported articles are `needs-business-review` drafts, so **none is public yet** — the journal shows a
+All nine imported articles are `needs-business-review` drafts, so **none is public yet** — the journal shows a
 "guides are on the way" note, `/blog` is `noindex`, and it is left out of the sitemap until one is published.
 
 Preferred: open `/admin`, edit the article, record the owner's sign-off (**Mark as reviewed & approved**), then **Publish** —

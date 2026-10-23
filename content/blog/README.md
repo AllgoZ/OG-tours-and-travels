@@ -43,7 +43,7 @@ reviewStatus: needs-business-review    # or: approved
 
 ## Review status
 
-The five starter articles are marked `reviewStatus: needs-business-review`. While that is set:
+The nine articles (five starter + four local guides) are marked `reviewStatus: needs-business-review`. While that is set:
 
 - a small "Example article — pending business review" note shows on the article, and
 - `npm run check:launch` lists them as unreviewed.

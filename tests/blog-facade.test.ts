@@ -18,7 +18,7 @@ describe("blog facade — markdown source (rollback path)", () => {
   it("serves the repository's Markdown posts newest first", async () => {
     const blog = await freshBlog();
     const posts = await blog.getAllPosts();
-    expect(posts.length).toBe(5);
+    expect(posts.length).toBe(9);
     const dates = posts.map((p) => +new Date(p.date));
     expect(dates).toEqual([...dates].sort((a, b) => b - a));
     expect(posts[0].readingMinutes).toBeGreaterThanOrEqual(1);
