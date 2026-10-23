@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-22 13:19 IST (UTC+05:30)**
+> **Last updated: 2026-10-22 16:37 IST (UTC+05:30)**
 
 @AGENTS.md
 
@@ -57,6 +57,7 @@ After the last full run: lint/typecheck/build clean, 179 tests pass (2026-10-22)
 * Postgres: a CHECK with `BETWEEN` passes on NULL; reusing `$1` as two types errors; sharp reports AVIF as `heif`/`av1`.
 * React 19 lint rules forbid `setState` in effects and ref access during render — derive state, drive toolbars through handlers.
 * Windows/Git Bash: heredocs with backslashes/regexes get mangled — create scripts with the Write/Edit tools, and avoid `\\` inside inline patch scripts.
+* Vercel warns on every `NEXT_PUBLIC_*` variable ("Keep this value private"): add them as type **Config**, never Secret. Publishable key is public by design; never put a service/secret key or `DATABASE_URL` in Vercel. Vercel needs Node 22.x/24.x (`check:launch` reads the TS config) and no `images` step.
 * `next dev`/build regenerate `.next/types`; after moving route files run `rm -rf .next && npx next typegen` if `tsc` complains about stale validators.
 
 ## Where things are documented

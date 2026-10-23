@@ -86,6 +86,19 @@ The privacy policy switches to wording that discloses Google Tag Manager while i
 3. Submit `https://<domain>/sitemap.xml`; inspect the home page and one article URL; request indexing.
 4. Run the live URL through Google's Rich Results Test (should show `FAQPage`, `BlogPosting`, `BreadcrumbList`).
 5. Create/verify the Google Business Profile and put its URL in `googleBusinessProfileUrl`.
-6. Create a GA4 property, add its tag in the GTM container, publish the container, and link GA4 to Search Console.
+6. Link GA4 to Search Console (the GA4 property exists — see below).
 
-None of these external connections have been made.
+### GA4 — property exists, tag goes in GTM
+
+GA4 web stream **OG TRAVELS** (stream URL `https://www.ogtravels.in`, Measurement ID `G-JMDL8MDC6E`; the ID is public by design, like the GTM ID).
+Per the one-third-party-script rule the `gtag.js` snippet is **not** pasted into the code — GA4 is delivered through the GTM container the site already loads. In GTM (`GTM-K42Z4THV`):
+
+1. Tags → New → **Google tag** → Tag ID `G-JMDL8MDC6E` → trigger **Initialization – All Pages**. (Do not also add the raw `gtag.js` snippet to the site: that double-counts.)
+2. Leave *Enhanced measurement* on in the GA4 stream (page views on History Change, outbound clicks, etc.), or add a *History Change* trigger → GA4 event tag `page_view`.
+3. Optional events: link-click triggers for `a[href^="https://wa.me/"]` → `click_whatsapp` and `a[href^="tel:"]` → `click_call`; mark them as key events in GA4.
+4. **Preview** (Tag Assistant) on the live domain, confirm the GA4 tag fires and no hits come from `/admin`, then **Submit/Publish** the container version.
+5. In GA4 → Admin → Data collection, confirm the stream shows "data flowing" (Realtime) after the first visit.
+
+Production domain: the stream URL implies **`https://www.ogtravels.in`**. It is set only through the host env var `NEXT_PUBLIC_SITE_URL` (Vercel **Production** only, type Config) — not hard-coded — and GTM/GA load only once it is set. Set it on Production, redeploy, then verify.
+
+Not yet done: setting `NEXT_PUBLIC_SITE_URL`, the GTM tag/publish, Search Console, the Google Business Profile.

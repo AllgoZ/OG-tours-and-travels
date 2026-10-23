@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-22 13:19 IST (UTC+05:30)**
+> **Last updated: 2026-10-23 15:45 IST (UTC+05:30)**
 
 # Handover — OG Tours and Travels website
 
@@ -91,7 +91,8 @@ They are kept strictly separate everywhere and can be overridden per environment
 
 Run `npm run check:launch` for the live list. Summary:
 
-- [ ] **Required:** set the production domain (`NEXT_PUBLIC_SITE_URL`). Until then the site is `noindex` by design.
+- [ ] **Required:** set the production domain (`NEXT_PUBLIC_SITE_URL`) — the GA4 stream URL indicates `https://www.ogtravels.in` (set it on Vercel Production only). Until then the site is `noindex` by design and GTM/GA4 stay off.
+- [ ] **GA4** (property exists: stream OG TRAVELS, Measurement ID `G-JMDL8MDC6E`): add a Google tag with that ID **inside the GTM container** (Initialization – All Pages), Preview, publish; check GA4 Realtime. The raw `gtag.js` snippet is deliberately **not** in the code (CLAUDE.md rule 8) — it would double-count. Details: `docs/seo-aeo.md`.
 - [ ] **Supabase Auth hardening** (Dashboard): turn **off public sign-ups**, min password length ≥ 12, review rate limits, set Site URL (`docs/admin-cms.md` §1).
 - [ ] **Change the admin password** and **rotate** the database password + JWT secret that were shared in chat.
 - [ ] **Review the 5 starter articles** with the owner, then in `/admin` approve and publish each. Until then **no article is public**, `/blog` is `noindex` and out of the sitemap.
@@ -172,8 +173,10 @@ buttons: amber `accent` (navy text), green `whatsapp` (`CtaLink` picks it for Wh
 
 ## 8. Deploy
 
-**Vercel:** import the repo; env vars `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (+ optional overrides) — **not** `DATABASE_URL`.
-Build command: `npm run check:launch -- --strict && npm run build`.
+**Vercel:** import the repo; env vars `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (+ optional overrides, incl. `NEXT_PUBLIC_GTM_ID`) — **not** `DATABASE_URL`.
+Build command: `npm run check:launch -- --strict && npm run build`. No `npm run images` step is needed (generated images are committed).
+Vercel flags `NEXT_PUBLIC_*` variables with a "Keep this value private" warning — add them as type **Config** (not Secret): they are inlined into the browser bundle anyway, and the publishable key is public by design (RLS-limited). Set **Node.js 22.x/24.x** in Project → Settings (check:launch needs 22.18+); don't set `NEXT_PUBLIC_SITE_URL` on Preview so previews stay noindex and send no analytics.
+A failing `check:launch --strict` means a required variable is missing (domain or the two Supabase values) — the build log names it. First Vercel deploy: being set up as of 2026-10-22, **not yet verified**; run the CMS smoke test (`docs/admin-cms.md` §11) on the deployed URL.
 **Any Node host:** `npm ci && npm run images && npm run build && npm start` behind HTTPS (the CMS uses `Secure` cookies).
 After launch: validate in Google's Rich Results Test, submit `sitemap.xml` in Search Console, link the Google Business Profile.
 
@@ -181,6 +184,8 @@ After launch: validate in Google's Rich Results Test, submit `sitemap.xml` in Se
 
 ## 9. Recent change history (newest first)
 
+- **2026-10-23 — GA4 recorded:** Measurement ID `G-JMDL8MDC6E` (stream OG TRAVELS, `https://www.ogtravels.in`). Decision: GA4 is delivered via the existing GTM container, no code change; docs updated (`docs/seo-aeo.md`, `LAUNCH-CHECKLIST.md`, this file) with the GTM steps and the intended production domain. Not yet done: GTM tag + publish, `NEXT_PUBLIC_SITE_URL` on Vercel.
+- **2026-10-22 — pushed to GitHub:** commit `19e6908` ("Add admin CMS, Supabase-backed journal and Google Tag Manager") on `main` contains all CMS, Supabase and GTM work. Vercel deploy guidance added (§8): env vars as Config type, Node 22+/24, build command.
 - **2026-10-22 — Google Tag Manager installed** (container `GTM-K42Z4THV`): `GoogleTagManager` component in `SiteChrome`, `lib/gtm.ts` gate (production + domain set + valid ID), `business.analytics.gtmId`, `NEXT_PUBLIC_GTM_ID`, conditional privacy wording, `admin/not-found.tsx`, launch-check item, `tests/gtm.test.ts` (179 tests). Verified in a browser: `gtm.js` requested and `dataLayer` initialised on public pages, absent on `/admin`.
 - **2026-10-20 — docs refresh:** ARCHITECTURE/README/handover rewritten for the CMS; new `CLAUDE.md`; every doc now carries a "Last updated" stamp (see CLAUDE.md for the rule).
 - **2026-10-20 — first CMS admin created** (`ogtravels.ckp@gmail.com`) via a one-off script; verified sign-in + `is_admin`.
@@ -194,4 +199,4 @@ After launch: validate in Google's Rich Results Test, submit `sitemap.xml` in Se
 - Hero van slides on load (silent); click replays with engine + honk. Mobile Call/WhatsApp moved to floating buttons. Scrolling Google-reviews section (config-driven, verified-only).
 - v2 redesign (cinematic identity, motion, SEO blog system); initial build (landing page, config-driven enquiry flow, SEO foundations).
 
-_Git: latest commit on `main` is "Change WhatsApp number to +91 81108 11003"; all CMS/Supabase work above is **uncommitted** in the working tree._
+_Git: `main` is pushed to `origin` (latest commit `19e6908`); the working tree was clean at that point. Nothing from the CMS/Supabase/GTM work remains uncommitted._

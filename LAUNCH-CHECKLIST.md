@@ -13,8 +13,8 @@ throughout (WhatsApp enquiries vs phone calls).
 
 ## Required before launch
 
-- [ ] **Production domain** (e.g. `https://www.ogtoursandtravels.com`) → set `siteUrl` /
-      `NEXT_PUBLIC_SITE_URL`. Until it is set the site stays `noindex`, with no sitemap or canonical.
+- [ ] **Production domain** (GA4 stream URL says `https://www.ogtravels.in`) → set `siteUrl` /
+      `NEXT_PUBLIC_SITE_URL` (Vercel Production env, type Config). Until it is set the site stays `noindex`, with no sitemap or canonical, and GTM/GA4 stay off.
 
 ## Strongly recommended
 
@@ -41,6 +41,7 @@ throughout (WhatsApp enquiries vs phone calls).
       `destinations` has entries.
 - [ ] Privacy policy: review [`src/app/privacy/page.tsx`](src/app/privacy/page.tsx) with the owner
       (it now discloses Google Tag Manager while that is active); set `privacyUpdated`.
+- [ ] **GA4** (`G-JMDL8MDC6E`, stream OG TRAVELS): add a Google tag with that ID in the GTM container (All Pages / Initialization), publish, and check Realtime — `docs/seo-aeo.md`. Don't paste `gtag.js` into the code.
 - [ ] Google Tag Manager (installed, production + domain only): in the GTM container add and publish the tags,
       set up consent handling for the audience, and use Preview/Tag Assistant on the live domain to confirm it fires.
 - [ ] FAQ wording in [`src/content/faq.ts`](src/content/faq.ts): add real policies (cancellation,

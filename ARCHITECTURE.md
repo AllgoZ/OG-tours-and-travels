@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-22 13:19 IST (UTC+05:30)**
+> **Last updated: 2026-10-22 16:37 IST (UTC+05:30)**
 
 # Architecture — OG Tours and Travels website
 
@@ -306,6 +306,8 @@ Git (main) ─► Vercel (or Node host)
                │          NOT DATABASE_URL (admin tooling only, kept on the owner's machine)
                └─ run:    next start behind HTTPS (HTTPS is required for Secure session cookies)
 ```
+Hosting notes: add the `NEXT_PUBLIC_*` values as Vercel **Config** variables (the "keep private" warning is expected — they are inlined into the browser bundle; the publishable key is public by design, RLS-limited);
+set Node.js 22.x/24.x (`check:launch` needs 22.18+); leave `NEXT_PUBLIC_SITE_URL` unset on Preview so previews stay `noindex` and Google Tag Manager stays off. Generated images are committed, so no `npm run images` step is needed.
 First-time CMS setup: run migrations → configure Supabase Auth (sign-ups off, password policy) → provision the first admin → sign in. See [`docs/admin-cms.md`](docs/admin-cms.md) §1–2, §11.
 
 ---

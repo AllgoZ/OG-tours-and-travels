@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-22 13:19 IST (UTC+05:30)**
+> **Last updated: 2026-10-22 16:37 IST (UTC+05:30)**
 
 # OG TOURS AND TRAVELS — website + admin CMS
 
@@ -182,6 +182,7 @@ Latest results: 179 unit/DB tests pass (2026-10-22); as of 2026-10-20: `qa:admin
 
 **Vercel:** import the repo; set `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (and optionally the number overrides) in
 Project → Settings → Environment Variables — **not** `DATABASE_URL`. Build command: `npm run check:launch -- --strict && npm run build`.
+Vercel flags `NEXT_PUBLIC_*` variables with a "Keep this value private" warning — add them as type **Config** (not Secret): they are inlined into the browser bundle anyway, and the publishable key is public by design (RLS-limited). Set **Node.js 22.x/24.x** in Project → Settings (check:launch needs 22.18+); don't set `NEXT_PUBLIC_SITE_URL` on Preview so previews stay noindex and send no analytics.
 
 **Any Node host / VPS:** `npm ci && npm run images && npm run build && npm start` behind an HTTPS reverse proxy (the CMS uses `Secure` cookies). Static export is **not**
 configured: `next/image`, server actions and on-demand revalidation need the Next server.
