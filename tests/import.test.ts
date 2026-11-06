@@ -82,7 +82,7 @@ describe("readMarkdownPosts", () => {
   it("reads the repository's real posts without failures", () => {
     const { rows, failures } = readMarkdownPosts(path.resolve("content/blog"));
     expect(failures).toEqual([]);
-    expect(rows).toHaveLength(9);
+    expect(rows).toHaveLength(39);
   });
 
   it("is idempotent: mapping the same files twice yields identical rows (so re-runs are 'unchanged')", () => {

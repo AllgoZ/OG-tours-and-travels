@@ -4,6 +4,8 @@ import urbaniaRental from "@/assets/images/blog-urbania-rental.jpg";
 import familyChecklist from "@/assets/images/blog-family-checklist.jpg";
 import weddingsEvents from "@/assets/images/blog-weddings-events.jpg";
 import multiplePassengers from "@/assets/images/blog-multiple-passengers.jpg";
+import threeQuarter from "@/assets/images/hero.jpg";
+import frontStraight from "@/assets/images/front.jpg";
 
 /**
  * Maps a post's `cover` frontmatter (a filename) to a statically-imported image so
@@ -15,6 +17,9 @@ export const blogCovers: Record<string, StaticImageData> = {
   "blog-family-checklist.jpg": familyChecklist,
   "blog-weddings-events.jpg": weddingsEvents,
   "blog-multiple-passengers.jpg": multiplePassengers,
+  // The vehicle gallery photos, reused as covers (real photographs of the Force Urbania).
+  "hero.jpg": threeQuarter,
+  "front.jpg": frontStraight,
 };
 
 export function coverImage(name: string): StaticImageData {

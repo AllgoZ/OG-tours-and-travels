@@ -43,7 +43,7 @@ reviewStatus: needs-business-review    # or: approved
 
 ## Review status
 
-The nine articles (five starter + four local guides) are marked `reviewStatus: needs-business-review`. While that is set:
+All 39 articles (five starter, four local guides, fifteen Force Urbania / Kodaikanal guides, fifteen Dindigul guides) are marked `reviewStatus: needs-business-review` in the Markdown source (the database holds the live review state — see `npm run blog:status`). While that is set:
 
 - a small "Example article — pending business review" note shows on the article, and
 - `npm run check:launch` lists them as unreviewed.

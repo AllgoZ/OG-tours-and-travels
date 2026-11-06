@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-22 16:37 IST (UTC+05:30)**
+> **Last updated: 2026-11-05 11:00 IST (UTC+05:30)**
 
 @AGENTS.md
 
@@ -36,7 +36,7 @@ bash scripts/serve-qa.sh && node scripts/qa.mjs http://localhost:3100 <dir> && n
 npm run qa:admin                           # e2e CMS test against the running :3100 server (needs DATABASE_URL)
 ```
 `serve-qa.sh` kills every `node.exe` first. While no article is public in Supabase, `qa-interact`'s blog checks need `BLOG_SOURCE=markdown bash scripts/serve-qa.sh`.
-After the last full run: lint/typecheck/build clean, 179 tests pass (2026-10-22), `qa:admin` 85/85 (2026-10-20), public QA passes except 9 pre-existing axe colour-contrast findings.
+After the last full run: lint/typecheck/build clean, 257 tests pass (2026-11-05), `qa:admin` 85/85 (2026-10-20), public QA passes except 9 pre-existing axe colour-contrast findings.
 
 ## Architecture in six lines
 

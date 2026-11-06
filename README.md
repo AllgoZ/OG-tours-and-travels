@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-23 16:25 IST (UTC+05:30)**
+> **Last updated: 2026-11-05 11:00 IST (UTC+05:30)**
 
 # OG TOURS AND TRAVELS — website + admin CMS
 
@@ -113,7 +113,7 @@ Public pages: `/blog` (listing), `/blog/page/[n]` (overflow), `/blog/[slug]` (ar
 renamed slug ⇒ 308 redirect), `/blog/feed.xml` (RSS).
 
 A post is **public only when** `draft = false`, `review_status = 'approved'` and `published_at <= now()` (enforced by RLS; a database constraint also makes
-"live ⇒ approved"). The nine articles (five starter + four Oddanchatram/Dindigul guides) were imported as drafts awaiting business review, so **none is public yet**.
+"live ⇒ approved"). There are 39 articles: 34 are public (the four Oddanchatram/Dindigul guides, the 15 Force Urbania / Kodaikanal guides published 2026-10-29 and the 15 Dindigul-focused guides published 2026-11-05); the five starter posts stay hidden drafts.
 
 **Use the CMS:** sign in at `/admin/login` → write/edit → *Mark as reviewed & approved* (explicit confirmation) → *Publish*. Saving a draft never publishes.
 Publishing refreshes the affected public pages on demand — no rebuild (single-instance/Vercel; otherwise redeploy). Full guide: [`docs/admin-cms.md`](docs/admin-cms.md).
@@ -175,7 +175,7 @@ node scripts/qa-interact.mjs http://localhost:3100           # form redirect, FA
 npm run qa:admin                          # end-to-end CMS test (creates + removes throw-away users; needs DATABASE_URL)
 ```
 
-Latest results: 179 unit/DB tests pass (2026-10-22); as of 2026-10-20: `qa:admin` 85/85; public QA passes except 9 pre-existing axe colour-contrast findings
+Latest results: 257 unit/DB tests pass (2026-11-05); as of 2026-10-20: `qa:admin` 85/85; public QA passes except 9 pre-existing axe colour-contrast findings
 (green WhatsApp button, small text). Earlier Lighthouse mobile: Performance 86–95, Accessibility 99–100, Best Practices 100, SEO 100, CLS 0.
 
 ## Deployment

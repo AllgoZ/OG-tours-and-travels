@@ -1,4 +1,4 @@
-> **Last updated: 2026-10-22 16:37 IST (UTC+05:30)**
+> **Last updated: 2026-11-05 11:00 IST (UTC+05:30)**
 
 # Architecture — OG Tours and Travels website
 
@@ -292,7 +292,7 @@ Fonts: Space Grotesk / Inter / Instrument Serif. Motion utilities honour `prefer
 | `node scripts/qa.mjs <url> <dir>` · `node scripts/qa-interact.mjs <url>` | Public-site Playwright + axe QA |
 | `npm run qa:admin` | End-to-end CMS test (throw-away users, cleans up); needs `DATABASE_URL` and a running server |
 
-Last recorded results: lint, typecheck, build clean and 179 tests pass (2026-10-22); as of 2026-10-20: `qa:admin` 85/85 twice in a row; public QA passes except 9 pre-existing axe
+Last recorded results: lint, typecheck, build clean and 257 tests pass (2026-11-05); as of 2026-10-20: `qa:admin` 85/85 twice in a row; public QA passes except 9 pre-existing axe
 colour-contrast findings (green WhatsApp button, small text).
 
 ---
